@@ -23,7 +23,7 @@ int teste_passageiro_novo(){
   return 1;
 }
 
-float teste_passageiro_acessa() {
+float teste_aluno_acessa_com_dados_validos() {
   int id;
   char nome[50];
   char endereco[100];
@@ -49,7 +49,7 @@ float teste_passageiro_acessa() {
 
 int teste_passageiro_libera(){
 
-  Passageiro* passageiro = passageiro_novo(1, "Abraão", "Rua Nova Conquista, 3849");
+  Passageiro* passageiro = passageiro_novo(1, "Abraão", "Computação");
   Passageiro* passageiro2 = NULL;
 
   passageiro_libera(&passageiro);
@@ -64,19 +64,7 @@ int teste_passageiro_libera(){
   return 1;
 }
 
-int teste_fila_cria(){
-  Fila *fila = fila_cria();
-  if (fila != NULL) {
-    printf("Passou no teste de criação de fila.\n");
-    return 1;
-  } else {
-    printf("Falhou no teste de criação de fila.\n");
-    return 0;
-  }
-  
-}
-
-int teste_fila_cria() {
+int teste_fila_passageiros_cria() {
   Fila *fila = fila_cria();
   if (fila != NULL) {
     printf("Passou na função de criação de fila.\n");
@@ -87,7 +75,7 @@ int teste_fila_cria() {
   }
 }
 
-float teste_fila_libera_com_dados_validos() {
+int teste_fila_passageiros_libera_com_dados_validos() {
   float pontuacao = 0;
   Fila *fila = fila_cria();
   fila_libera(&fila);
@@ -102,7 +90,7 @@ float teste_fila_libera_com_dados_validos() {
   }
 }
 
-float teste_fila_busca_com_dados_validos() {
+int teste_fila_passageiros_busca_com_dados_validos() {
   int id;
   char nome[50];
   char endereco[100];
@@ -136,7 +124,7 @@ float teste_fila_busca_com_dados_validos() {
   return 0;
 }
 
-float teste_fila_passageiro_insere() {
+int teste_fila_passageiros_insere() {
   Fila *fila = fila_cria();
   if (fila != NULL) {
     Passageiro *abraao = passageiro_novo(1, "Abraão", "Rua Ipanema, 221");
@@ -161,6 +149,11 @@ float teste_fila_passageiro_insere() {
     printf(
         "[Falhou]: fila insere\n");
   }
+  return 0;
+}
+
+int main(void) {
+  printf("Hello World, Equipe\n");
   return 0;
 }
 
@@ -214,36 +207,8 @@ int testa_voo_libera(){
     return 1;
   }
   else{
-    printf("Voo_Libera: [FALHOU]");
+    printf("Voo_Libera[FALHOU]");
     return -1
   }
-}
-
-int testa_voo_acessa(){
-  int codigo;
-  char origem[100];
-  char destino[100];
-  Voo* Voo_Aux = voo_novo(1590, "Santiago", "Rio de Janeiro");
-  if (Voo_Aux != NULL){
-    voo_acessa(Voo_Aux, &(codigo), origem, destino);
-    if (codigo == 1590 && strcmp(origem, "Santiago" == 0 && strcmp(destino, "Rio de Janeiro") == 0)){
-      printf("Voo_Acessa: [PASSOU]");
-      return 1;
-    }
-    else{
-      printf("Voo_Acessa: [FALHOU]");
-    }
-  }
-}
-
-int testa_fila_voos_insere(){
-  Fila
-}
 
 
-
-
-int main(void) {
-  printf("Hello World, Equipe\n");
-  return 0;
-}
