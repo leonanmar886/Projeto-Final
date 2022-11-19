@@ -8,7 +8,7 @@ struct passageiro {
   char nome[100];
   char endereco[150];
 };
-
+//
 int verifica(int id, char *nome, char *end) {
   if (id < 1 || nome == NULL || end == NULL) {
     return -1;

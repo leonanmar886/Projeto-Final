@@ -99,7 +99,7 @@ int fila_insere(Lista* lista, Passageiro* passa){
   return 1;
   
 }
-
+//
 Passageiro* fila_remove(Lista* lista){
   if(lista == NULL ||lista->primeiro == NULL){
     return NULL;
