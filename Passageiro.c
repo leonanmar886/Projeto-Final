@@ -10,10 +10,12 @@ struct passageiro {
 };
 
 int verifica(int id, char *nome, char *end) {
-  if (id < 0 || nome == NULL || end == NULL) {
+  if (id < 1 || nome == NULL || end == NULL) {
     return -1;
   }
-
+if (strlen(nome)>100 || strlen(end)>150) {
+    return -1;
+  }
   return 1;
 }
 

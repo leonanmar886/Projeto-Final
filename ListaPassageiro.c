@@ -16,14 +16,14 @@ struct lista_passageiro {
   struct no_passageiro *primeiro;
 };
 
-Lista* cria_lista(){
+Lista* fila_cria(){
   Lista* nova_lista = (Lista *)malloc(sizeof(Lista));
    nova_lista->primeiro = NULL;
   return nova_lista;
   
 }
 
-int libera_lista(Lista **lista){
+int fila_libera(Lista **lista){
   if(lista != NULL){
     if((*lista)->primeiro != NULL){
       No* aux = (*lista)->primeiro;
@@ -39,7 +39,7 @@ int libera_lista(Lista **lista){
   return 0;
 }
 
-Passageiro* buscar_lista(Lista* lista, int id){
+Passageiro* fila_busca(Lista* lista, int id){
   if (lista==NULL && lista->primeiro==NULL){
   return NULL;
 }
@@ -60,12 +60,11 @@ passageiro_acessa((x->passageiro),&id_aux,nome,end);
     
     }
 
-  
   return NULL;
 
 }
 
-int inserir_lista(Lista* lista, Passageiro* passa){
+int fila_insere(Lista* lista, Passageiro* passa){
   if(lista == NULL || passa == NULL){
     return -1;
   }
@@ -74,7 +73,7 @@ int inserir_lista(Lista* lista, Passageiro* passa){
     char nome[100];
     char end[150];
     passageiro_acessa(passa, &id, nome, end);
-    Passageiro *aux =buscar_lista(lista, id);
+    Passageiro *aux =fila_busca(lista, id);
     if(aux != NULL){
       return 0;
     }
@@ -101,7 +100,7 @@ int inserir_lista(Lista* lista, Passageiro* passa){
   
 }
 
-Passageiro* remover_lista(Lista* lista){
+Passageiro* fila_remove(Lista* lista){
   if(lista == NULL ||lista->primeiro == NULL){
     return NULL;
   }

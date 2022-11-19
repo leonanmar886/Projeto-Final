@@ -6,8 +6,8 @@ Lista* cria_lista();
 
 int libera_lista(Lista **lista);
 
-Passageiro* buscar_lista(Lista* lista, int id);
+Passageiro* fila_busca(Lista* lista, int id);
 
-int inserir_lista(Lista* lista, Passageiro* passa);
+int fila_insere(Lista* lista, Passageiro* passa);
 
 Passageiro* remover_lista(Lista* lista);
