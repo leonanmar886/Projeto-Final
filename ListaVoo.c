@@ -28,6 +28,7 @@ int libera_lista(Lista **lista) {
   return -1;
 }
 
+
 Lista* buscar_lista(Lista *lista, int codigo) {
   if(lista == NULL || lista->primeiro == NULL) {
     return NULL;
@@ -47,3 +48,41 @@ Lista* buscar_lista(Lista *lista, int codigo) {
   
   return NULL;
 }
+
+int inserir_lista(Lista *lista, Voo *voo){
+  if(lista == NULL || voo == NULL){
+    return -1
+  }
+  if(lista->primeiro != NULL){
+    int codigo;
+    char origem[100];
+    char destino[150];
+    voo_acessa(voo, &codigo, origem, destino);
+    Voo *aux = buscar_lista(lista, codigo);
+    if(aux != NULL){
+      return 0;
+    }
+    
+  }
+  if (lista->primeiro == NULL){
+    No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
+    novo->voo = voo;
+    novo->proximo = NULL;
+    lista->primeiro = novo;
+  }
+  else {
+    No_Voo* ultimo = lista->primeiro;
+    while (ultimo->proximo != NULL){
+      ultimo = ultimo->proximo;
+    }
+  No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
+  novo->voo = voo;
+  novo->proximo = NULL;
+  ultimo->proximo = novo;
+    
+  }
+  return 1;
+  
+}
+
+
