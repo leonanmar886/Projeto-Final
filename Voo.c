@@ -15,6 +15,31 @@ struct voo {
 // voo acessa (leitura)
 // voo edita
 
+int verifica_params(int codigo, char *origem, char *destino) {
+  if (codigo < 0 || origem == NULL || destino == NULL) {
+    return -1;
+  }
+
+  if (strlen(origem) > 100 || strlen(destino) > 100) {
+    return -1;
+  }
+
+  return 1;
+}
+
+Voo *voo_novo(int codigo, char *origem, char *destino) {
+  if (verifica_params(codigo, origem, destino) == -1) {
+    return NULL;
+  }
+
+  Voo *novo_voo = (Voo*)malloc(sizeof(Voo));
+  novo_voo->codigo = codigo;
+  strcpy(novo_voo->origem, origem);
+  strcpy(novo_voo>destino, destino);
+
+  return novo_voo;
+}
+
 int voo_verifica(Voo *voo) {
   int codigo_aux;
   char origem_aux[100];
@@ -27,6 +52,13 @@ int voo_verifica(Voo *voo) {
   else {
     return 1;
   }
+}
+
+void voo_libera(Voo **voo) {
+  if(voo != NULL){
+    free(*voo);
+    *voo = NULL;      
+  } 
 }
   
   
@@ -43,20 +75,35 @@ void voo_acessa(Voo *voo, int *codigo, char *origem, char *destino) {
   }
 }
 
-
-void voo_libera(Voo **voo) {
-  if(voo != NULL){
-    free(*voo);
-    *voo = NULL;      
-  } 
-}
-
-
 void voo_atribui(Voo *voo, int codigo, char *origem, char *destino) {
-  if (voo != NULL && verifica(codigo, origem, destino) == 1) {
+  if (voo != NULL && verifica_params(codigo, origem, destino) == 1) {
     voo->codigo = codigo;
     strcpy(voo->origem, origem);
     strcpy(voo->destino, destino);
   }  
+}
+
+int voo_igual(Voo *Voo1, Voo *Voo2){
+  if (Voo1 == NULL || Voo2 == NULL) {
+    return -1;
+  }
+
+  if (Voo1->codigo != Voo2->codigo) {
+    return 0;
+  }
+
+  if (strcmp(Voo1->origem, Voo2->origem) != 0) {
+    return 0;
+  }
+
+  if (strcmp(Voo1->destino, Voo2->destino) != 0) {
+    return 0;
+  }
+
+  return 1;
+}
+
+int voo_tamanho(){
+  return sizeof(Voo);
 }
 

@@ -89,11 +89,46 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
 }
 
 
-Voo* lista_remove(ListaVoo* lista){
+Voo* fila_voo_retira(ListaVoo* lista){
   if(lista == NULL || lista->primeiro == NULL){
     return NULL;
   }
   Voo* voo = lista->primeiro->voo;
   lista->primeiro = lista->primeiro->proximo;
   return voo;
+}
+
+Voo *fila_voo_primeiro(ListaVoo *fila) {
+  if (fila_voo_vazia(fila) || fila == NULL){
+    return NULL;
+  }
+  Voo* ptr_1st_voo = fila->primeiro->voo; //testars
+  return ptr_1st_voo;
+}
+
+int fila_voo_vazia(ListaVoo *fila){
+  if (fila == NULL){
+    return -1;
+  }
+  if ((fila -> primeiro) == NULL){
+    return 1;  
+  }
+  else{
+    return 0;
+  }
+  }
+
+int fila_voo_quantidade(ListaVoo *fila) {
+    if (fila == NULL){
+      return -1;
+    }
+    else{
+      int tamanho = 0;
+      No_Voo* aux = fila->primeiro;
+      while (aux != NULL){
+        aux = aux -> proximo;
+        tamanho ++;
+      }
+      return tamanho;
+    }
 }
