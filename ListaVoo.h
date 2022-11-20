@@ -13,7 +13,8 @@ Lista* buscar_lista(Lista *lista, int codigo);
 
 //insere na lista um voo, retorna -1 se se a lista ou o voo forem nulos
 //retorna 0 se esse voo já estiver na lista
-//retorna 1 se for possível inserir na lista
+//retorna 1 se for possível inserir esse voo na lista
 int inserir_lista(Lista *lista, Voo *voo);
 
-//
+//remove um voo da lista, retorna o voo removido ou NULL se a lista ou o voo forem nulos
+Voo* lista_remove(Lista* lista);

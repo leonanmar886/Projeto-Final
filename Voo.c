@@ -60,4 +60,3 @@ void edita_voo(Voo *voo, int codigo, char *origem, char *destino) {
   }  
 }
 
-
