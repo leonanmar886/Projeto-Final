@@ -60,4 +60,3 @@ void voo_atribui(Voo *voo, int codigo, char *origem, char *destino) {
   }  
 }
 
-

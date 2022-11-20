@@ -89,3 +89,11 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
 }
 
 
+Voo* lista_remove(Lista* lista){
+  if(lista == NULL || lista->primeiro == NULL){
+    return NULL;
+  }
+  Voo* voo = lista->primeiro->voo;
+  lista->primeiro = lista->primeiro->proximo;
+  return voo;
+}

@@ -32,11 +32,9 @@ Voo *fila_voo_busca(ListaVoo *ListaVoo, int codigo);
  */
 int fila_voo_vazia(ListaVoo *ListaVoo);
 
-/* Computa a quantidade de Voos Voos na ListaVoo. Retorna a quantidade de Voos
- * ou -1, caso a ListaVoo for NULL.
- */
 
 /* Computa a quantidade de voos na fila. Retorna a quantidade de voos
  * ou -1, caso a fila for NULL.
  */
 int fila_voo_quantidade(ListaVoo *fila);
+
