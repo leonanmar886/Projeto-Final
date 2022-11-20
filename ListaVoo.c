@@ -29,5 +29,21 @@ int libera_lista(Lista **lista) {
 }
 
 Lista* buscar_lista(Lista *lista, int codigo) {
+  if(lista == NULL || lista->primeiro == NULL) {
+    return NULL;
+  }
+  No_Voo *x = lista->primeiro;
+  int codigo_aux;
+  char origem[100];
+  char destino[150];
+  voo_acessa(x->voo, &codigo_aux, origem, destino);
+
+  while(x != NULL){
+    if(codigo_aux == codigo){
+      return x->voo;
+    }
+    x =  x->proximo;
+    }
   
+  return NULL;
 }
