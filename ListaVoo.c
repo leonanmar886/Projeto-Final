@@ -89,7 +89,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
 }
 
 
-Voo* lista_remove(Lista* lista){
+Voo* lista_remove(ListaVoo* lista){
   if(lista == NULL || lista->primeiro == NULL){
     return NULL;
   }
