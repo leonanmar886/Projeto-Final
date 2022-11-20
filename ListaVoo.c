@@ -1,5 +1,5 @@
-#include "TadNoVoo.h"
-#include "TadVoo.h"
+#include "ListaVoo.h"
+#include "Voo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,17 +9,20 @@ struct no_voo {
   struct no_voo *proximo;
 };
 
+typedef struct no_voo No_Voo;
+
+
 struct lista_voo { 
   struct no_voo *primeiro;
 };
 
-Lista* cria_lista() {
-  Lista *nova_lista = (Lista *) malloc(sizeof(Lista));
+ListaVoo* fila_voo_cria() {
+  ListaVoo *nova_lista = (ListaVoo *) malloc(sizeof(ListaVoo));
   nova_lista->primeiro = NULL;
   return nova_lista;
 }
 
-int libera_lista(Lista **lista) {
+int fila_voo_libera(ListaVoo **lista) {
   if (lista != NULL) {
     free(*lista);
     *lista = NULL;
@@ -29,14 +32,14 @@ int libera_lista(Lista **lista) {
 }
 
 
-Lista* buscar_lista(Lista *lista, int codigo) {
+Voo* fila_voo_busca(ListaVoo *lista, int codigo) {
   if(lista == NULL || lista->primeiro == NULL) {
     return NULL;
   }
   No_Voo *x = lista->primeiro;
   int codigo_aux;
   char origem[100];
-  char destino[150];
+  char destino[100];
   voo_acessa(x->voo, &codigo_aux, origem, destino);
 
   while(x != NULL){
@@ -49,14 +52,14 @@ Lista* buscar_lista(Lista *lista, int codigo) {
   return NULL;
 }
 
-int inserir_lista(Lista *lista, Voo *voo){
+int fila_voo_insere(ListaVoo *lista, Voo *voo){
   if(lista == NULL || voo == NULL){
-    return -1
+    return -1;
   }
   if(lista->primeiro != NULL){
     int codigo;
     char origem[100];
-    char destino[150];
+    char destino[100];
     voo_acessa(voo, &codigo, origem, destino);
     Voo *aux = buscar_lista(lista, codigo);
     if(aux != NULL){

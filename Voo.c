@@ -1,4 +1,4 @@
-#include "TadVoo.h"
+#include "Voo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,7 +44,7 @@ void voo_acessa(Voo *voo, int *codigo, char *origem, char *destino) {
 }
 
 
-void libera_voo(Voo **voo) {
+void voo_libera(Voo **voo) {
   if(voo != NULL){
     free(*voo);
     *voo = NULL;      
@@ -52,7 +52,7 @@ void libera_voo(Voo **voo) {
 }
 
 
-void edita_voo(Voo *voo, int codigo, char *origem, char *destino) {
+void voo_atribui(Voo *voo, int codigo, char *origem, char *destino) {
   if (voo != NULL && verifica(codigo, origem, destino) == 1) {
     voo->codigo = codigo;
     strcpy(voo->origem, origem);
