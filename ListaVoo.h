@@ -1,5 +1,4 @@
 #include "Voo.h"
-#include "TravelBooking.h"
 
 /* Aloca espaço em memória e retorna uma ListaVoo ok */
 ListaVoo *fila_voo_cria();
