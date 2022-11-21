@@ -5,8 +5,8 @@
 
 struct voo {
   int codigo;
-  char *origem[100];
-  char *destino[150];
+  char origem[100];
+  char destino[100];
 };
 
 // voo verifica
@@ -31,11 +31,13 @@ Voo *voo_novo(int codigo, char *origem, char *destino) {
   if (verifica_params(codigo, origem, destino) == -1) {
     return NULL;
   }
-
+  if (strcmp(origem, destino) == 0){
+    return NULL;
+  }
   Voo *novo_voo = (Voo*)malloc(sizeof(Voo));
   novo_voo->codigo = codigo;
   strcpy(novo_voo->origem, origem);
-  strcpy(novo_voo>destino, destino);
+  strcpy(novo_voo->destino, destino);
 
   return novo_voo;
 }
@@ -45,7 +47,7 @@ int voo_verifica(Voo *voo) {
   char origem_aux[100];
   char destino_aux[150];
   
-  voo_acessa(voo, codigo_aux, origem_aux, destino_aux);
+  voo_acessa(voo, &(codigo_aux), origem_aux, destino_aux);
   if (codigo_aux < 0 || origem_aux == NULL || destino_aux == NULL) {
     return -1;
   }
@@ -54,11 +56,13 @@ int voo_verifica(Voo *voo) {
   }
 }
 
-void voo_libera(Voo **voo) {
+int voo_libera(Voo **voo) {
   if(voo != NULL){
     free(*voo);
-    *voo = NULL;      
+    *voo = NULL;   
+    return 1;   
   } 
+  return 0;
 }
   
   

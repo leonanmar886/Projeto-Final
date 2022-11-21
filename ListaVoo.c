@@ -1,5 +1,4 @@
 #include "ListaVoo.h"
-#include "Voo.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -61,7 +60,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
     char origem[100];
     char destino[100];
     voo_acessa(voo, &codigo, origem, destino);
-    Voo *aux = buscar_lista(lista, codigo);
+    Voo *aux = fila_voo_busca(lista, codigo);
     if(aux != NULL){
       return 0;
     }

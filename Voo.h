@@ -10,7 +10,7 @@ int voo_verifica(Voo *voo);
 Voo *voo_novo(int codigo, char *origem, char *destino);
 
 /* Libera a memória de um Voo previamente criado e atribui NULL ao Voo. Ok*/
-void voo_libera(Voo **Voo);
+int voo_libera(Voo **Voo);
 
 /* Copia os valores de um Voo para as referências informadas. Em caso de Voo
  * NULL, atribuir valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok */
