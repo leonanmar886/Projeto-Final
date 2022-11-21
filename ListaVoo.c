@@ -27,7 +27,7 @@ int fila_voo_libera(ListaVoo **lista) {
     *lista = NULL;
     return 1;
   }
-  return -1;
+  return 0;
 }
 
 
@@ -39,9 +39,9 @@ Voo* fila_voo_busca(ListaVoo *lista, int codigo) {
   int codigo_aux;
   char origem[100];
   char destino[100];
-  voo_acessa(x->voo, &codigo_aux, origem, destino);
 
   while(x != NULL){
+    voo_acessa(x->voo, &codigo_aux, origem, destino);
     if(codigo_aux == codigo){
       return x->voo;
     }
@@ -55,6 +55,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
   if(lista == NULL || voo == NULL){
     return -1;
   }
+
   if(lista->primeiro != NULL){
     int codigo;
     char origem[100];

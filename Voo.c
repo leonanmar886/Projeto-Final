@@ -60,9 +60,7 @@ int voo_libera(Voo **voo) {
   if(voo != NULL){
     free(*voo);
     *voo = NULL;   
-    return 1;   
   } 
-  return 0;
 }
   
   

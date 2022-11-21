@@ -378,24 +378,17 @@ int teste_voo_libera(){
   int codigo_valido = 550;
   char origem_valido[100] = "Londres";
   char destino_valido[100] = "Sobral";
-  int codigo_invalido = -2;
-  char *origem_invalido = NULL;
-  char *destino_invalido =  NULL;
   Voo* Voo_Valido = voo_novo(codigo_valido, origem_valido, destino_valido);
   Voo* Voo_Nulo = NULL;
-  int aux_1 = voo_libera(&(Voo_Valido));
-  int aux_2 = voo_libera(&(Voo_Nulo));
-    if (aux_1 != 1 || aux_2 != 0 || Voo_Valido != NULL || Voo_Nulo != NULL){
-    printf("[Falhou] - voo_libera() \n");
+  voo_libera(&(Voo_Valido));
+  voo_libera(&(Voo_Nulo));
+  if (Voo_Valido == NULL && Voo_Nulo == NULL){
+    printf("[Passou] - voo_libera() \n");
     return 0;
   }
-  else if (aux_1 == 1 && aux_2 == 0 && Voo_Valido == NULL && Voo_Nulo == NULL){
-    printf("[Passou] - voo_libera() \n");
-    return 1;
-  }
   else{
-    printf("[Falhou] - voo_libera() \n");
-    return -1;
+      printf("[Falhou] - voo_libera() \n");
+      return 1;
   }
 }
 int teste_voo_acessa(){
@@ -492,7 +485,6 @@ int teste_fila_voo_cria() {
   }
 }
 float teste_fila_voo_libera() {
-  float pontuacao = 0;
   ListaVoo *fila = fila_voo_cria();
   fila_voo_libera(&fila);
   if (fila != NULL || fila_voo_libera(NULL) != 0) {
@@ -528,10 +520,10 @@ float teste_fila_voo_insere() {
   if (fila != NULL) {
     Voo *voo_manaus = voo_novo(1, "Manaus", "Fortaleza");
     Voo *voo_coritiba = voo_novo(1, "Coritiba", "Fortaleza");
-    if (fila_voo_insere(fila, voo_manaus) == 1 && fila_voo_insere(fila, voo_coritiba) != 0 && fila_voo_insere(fila, NULL) == -1) {
+    if (fila_voo_insere(fila, voo_manaus) == 1 && fila_voo_insere(fila, voo_coritiba) == 0 && fila_voo_insere(fila, NULL) == -1) {
       Voo *voo_palmas = voo_novo(2, "Palmas", "Fortaleza");
       Voo *voo_recife = voo_novo(2, "Recife", "Fortaleza");
-      if (fila_voo_insere(fila, voo_palmas) == 1 && fila_voo_insere(fila, voo_recife) != 0) {
+      if (fila_voo_insere(fila, voo_palmas) == 1 && fila_voo_insere(fila, voo_recife) == 0) {
         Voo *voo_orlando = voo_novo(3, "Orlando", "Fortaleza");
         if (fila_voo_insere(fila, voo_orlando) == 1) {
           printf("[Passou] - fila_voo_insere\n");
