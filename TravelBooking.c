@@ -43,7 +43,7 @@ struct reserva {
   Data *data_viagem;
   Passageiro *passageiro;
   Voo *voo;
-  //Assento assento;
+  Assento assento;
 };
 
 struct agenda {

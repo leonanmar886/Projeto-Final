@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ListaVoo.h"
+#include "ListaPassageiro.h"
 
-/*int teste_passageiro_novo(){
+int teste_passageiro_novo(){
   printf("************************************************ TESTE PASSAGEIROS ************************************************ \n");
   char nome1[50] = "Carlinhos";
   char endereco1[100] = "Rua Taquari, 3850";
@@ -165,39 +166,7 @@ int teste_fila_passageiro_libera() {
   }
 }
 
-int teste_fila_passageiro_busca() {
-  int id;
-  char nome[50];
-  char endereco[100];
 
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
-    Passageiro *abraao = passageiro_novo(1, "Abraão", "Rua Ipanema, 221");
-    fila_passageiro_insere(fila, abraao);
-    Passageiro *jaco = passageiro_novo(2, "Jaco", "Rua Ipanema, 222");
-    fila_passageiro_insere(fila, jaco);
-    Passageiro *jose = passageiro_novo(3, "Jose", "Rua Ipanema, 223");
-    fila_passageiro_insere(fila, jose);
-    Passageiro *aux = fila_passageiro_busca(fila, 2);
-    Passageiro *aux1 = fila_passageiro_busca(NULL, 1);
-    Passageiro *aux2 = fila_passageiro_busca(fila, 5);
-    if (aux != NULL && aux2 == NULL && aux1 == NULL) {
-      passageiro_acessa(aux, &id, nome, endereco);
-      if (id == 2 && strcmp(nome, "Jaco") == 0 &&
-          strcmp(endereco, "Rua Ipanema, 222") == 0) {
-        printf("[Passou] - fila_passageiro_busca()\n");
-        return 1;
-      } else {
-        printf("[Falhou] - fila_passageiro_busca()\n");
-      }
-    } else {
-      printf("[Falhou] - fila_passageiro_busca()\n");
-    }
-  } else {
-    printf("[Falhou] - fila_passageiro_busca()\n");
-  }
-  return 0;
-}
 
 int teste_fila_passageiro_insere() {
   ListaPassageiro *fila = fila_passageiro_cria();
@@ -342,7 +311,7 @@ float teste_fila_passageiro_primeiro() {
   return 0;
 }
 
-*/
+
 //*******************************************
 //*******************************************
 //---------------------------Testes relacionados a Voo-----------------------------------------------------------------------------
@@ -637,7 +606,7 @@ float teste_fila_voo_retira() {
 }
 
 int main(void) {
-  /*
+  
   // Testes Passageiro
   teste_passageiro_novo();
   teste_passageiro_libera();
@@ -653,7 +622,7 @@ int main(void) {
   teste_fila_passageiro_busca();
   teste_fila_passageiro_retira();
   // Testes Voo
-  */
+  
   teste_voo_novo();
   teste_voo_libera();
   teste_voo_acessa();
