@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ListaVoo.h"
-#include "ListaPassageiro.h"
+#include "TravelBooking.h"
 
 int teste_passageiro_novo(){
   printf("************************************************ TESTE PASSAGEIROS ************************************************ \n");
-  char nome1[50] = "Carlinhos";
+  char nome1[100] = "Carlinhos";
   char endereco1[100] = "Rua Taquari, 3850";
-
-  char nome2[50] = "898493aaaaa84";
+  char nome2[100] = "898493aaaaa84";
   char endereco2[100] = "75834578";
 
   Passageiro* passageiro1 = passageiro_novo(1, nome1, endereco1); // passageiro com dados válidos.
@@ -608,6 +606,7 @@ float teste_fila_voo_retira() {
 int main(void) {
   
   // Testes Passageiro
+  
   teste_passageiro_novo();
   teste_passageiro_libera();
   teste_passageiro_acessa();
@@ -622,7 +621,7 @@ int main(void) {
   teste_fila_passageiro_busca();
   teste_fila_passageiro_retira();
   // Testes Voo
-  
+
   teste_voo_novo();
   teste_voo_libera();
   teste_voo_acessa();
