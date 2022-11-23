@@ -17,3 +17,13 @@ Algumas restrições:
 - Passageiros não podem criar viagens com interseção temporal (isto é, períodos de tempo conicidentes entre inicio e fim de cada viagem)
 
 Os arquivos `TravelBooking.c` e `TravelBooking.h` traz algums trechos de código úteis para a implementação do trabalho. No arquivo `TravelBooking.c`, cada equipe deverá escrever casos de teste que evidenciem as funcionalidades do sistema e que ele está respeitando todas as restrições estabelecidas. 
+
+gcc -c .\TravelBooking.c -o .\TravelBooking.o
+gcc -c .\TestaTravelBooking.c -o .\TestaTravelBooking.o          
+gcc -o .\TestaTravelBooking.exe .\TestaTravelBooking.o .\TravelBooking.o
+.\TestaTravelBooking.exe
+
+gcc -c .\TravelBooking.c -o .\TravelBooking.o
+gcc -c .\TestaTravelBooking.c -o .\TestaTravelBooking.o          
+gcc -o .\TestaTravelBooking.bin .\TestaTravelBooking.o .\TravelBooking.o
+.\TestaTravelBooking.bin
