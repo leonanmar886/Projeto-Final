@@ -17,13 +17,18 @@ struct reserva {
 };
 
 Trecho* novo_trecho(Reserva* reserva, Trecho* proximo_trecho){
-    if(reserva == NULL || proximo_trecho == NULL){
+    if(reserva == NULL){
         return NULL;
     }
 
     Trecho* trecho = (Trecho*) malloc(sizeof(Trecho));
     trecho->reserva = reserva;
-    trecho->proximo = proximo_trecho;
+    if(proximo_trecho != NULL){
+        Trecho** trecho_endereco = &(trecho->proximo);
+        *trecho_endereco = proximo_trecho;
+    } else {
+        trecho->proximo = NULL;
+    }
 
     return trecho;
 };
