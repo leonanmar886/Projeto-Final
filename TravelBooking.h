@@ -19,6 +19,7 @@ typedef struct passageiro Passageiro;
 typedef struct lista_passageiro ListaPassageiro;
 typedef struct reserva Reserva;
 typedef struct agenda Agenda;
+typedef struct trecho Trecho;
 typedef struct viagem Viagem;
 typedef struct tabela_viagem TabelaViagem;
 
@@ -34,7 +35,7 @@ int passageiro_verifica(Passageiro *passageiro);
 Passageiro *passageiro_novo(int codigo, char *origem, char *destino);
 
 /* Libera a memória de um passageiro previamente criado e atribui NULL ao passageiro. Ok*/
-int passageiro_libera(Passageiro **passageiro);
+void passageiro_libera(Passageiro **passageiro);
 
 /* Copia os valores de um passageiro para as referências informadas. Em caso de passageiro
  * NULL, atribuir valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok */

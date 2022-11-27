@@ -109,7 +109,7 @@ int passageiro_verifica(Passageiro *Passageiro) {
   }
 }
 
-int passageiro_libera(Passageiro **Passageiro) {
+void passageiro_libera(Passageiro **Passageiro) {
   if(Passageiro != NULL){
     free(*Passageiro);
     *Passageiro = NULL;   
@@ -487,3 +487,4 @@ int fila_voo_quantidade(ListaVoo *fila) {
       return tamanho;
     }
 }
+
