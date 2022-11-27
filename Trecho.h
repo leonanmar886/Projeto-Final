@@ -1,6 +1,8 @@
 #include "TravelBooking.h"
 
-//Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho.
+/* Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho.
+  (i) Se os campos passados como parametro forem NULL, a função retorna NULL;
+*/
 Trecho* novo_trecho(Reserva* reserva, Trecho* proximo_trecho);
 
 // Libera o espaço de memória atribuído a um trecho e atribui NULL ao Trecho.
