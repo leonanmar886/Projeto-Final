@@ -41,11 +41,12 @@ void trecho_acessa(Trecho* trecho, Reserva* reserva, Trecho* proximo_trecho){
     if(trecho == NULL){
         return NULL;
     }
-    Reserva* reserva_aux = trecho->reserva;
-    Trecho* trecho_aux = trecho->proximo;
 
-    *(reserva) = *(reserva_aux);
-    *(proximo_trecho) = *(trecho_aux);
+    Reserva** reserva_aux = &(reserva);
+    Trecho** trecho_aux = &(proximo_trecho);
+
+    *reserva_aux = trecho-> reserva;
+    *trecho_aux = trecho->proximo;
 };
 
 void trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_trecho){
@@ -53,8 +54,11 @@ void trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_
         return NULL;
     };
 
-    *(trecho->reserva) = *(nova_reserva);
-    *(trecho->proximo) = *(novo_proximo_trecho);
+    Reserva** reserva_aux = &(trecho->reserva);
+    Trecho** trecho_aux = &(trecho->proximo);
+
+    *reserva_aux = nova_reserva;
+    *trecho_aux = novo_proximo_trecho;
 };
 
 int trecho_igual(Trecho* trecho1, Trecho* trecho2){
