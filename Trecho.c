@@ -47,3 +47,30 @@ void trecho_acessa(Trecho* trecho, Reserva* reserva, Trecho* proximo_trecho){
     *(reserva) = *(reserva_aux);
     *(proximo_trecho) = *(trecho_aux);
 };
+
+void trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_trecho){
+    if(nova_reserva == NULL || novo_proximo_trecho == NULL){
+        return NULL;
+    };
+
+    *(trecho->reserva) = *(nova_reserva);
+    *(trecho->proximo) = *(novo_proximo_trecho);
+};
+
+int trecho_igual(Trecho* trecho1, Trecho* trecho2){
+    if(trecho1 == NULL || trecho2 == NULL){
+        return -1;
+    }
+    
+    Reserva* reserva1 = (Reserva*) malloc(sizeof(Reserva));
+    Trecho* proximo_trecho1 = (Trecho*) malloc(sizeof(Trecho));
+    Reserva* reserva2 = (Reserva*) malloc(sizeof(Reserva));
+    Trecho* proximo_trecho2 = (Trecho*) malloc(sizeof(Trecho));
+    trecho_acessa(trecho1, reserva1, proximo_trecho1);
+    trecho_acessa(trecho2, reserva2, proximo_trecho2);
+
+    int igualdade = reserva_igual(reserva1, reserva2);
+
+    return igualdade;
+
+}
