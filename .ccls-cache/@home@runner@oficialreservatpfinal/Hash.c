@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#define TAMANHO_MAXIMO 10
 typedef struct viagem Viagem;
 typedef struct tabela_viagem TabelaViagem;
 typedef struct trecho Trecho;
@@ -60,7 +60,7 @@ TabelaViagem* cria_hash(){
   TabelaViagem* novo_hash = (TabelaViagem*)malloc(sizeof(TabelaViagem));
 
   novo_hash->tabela_hash = NULL;
-  novo_hash->tamanho = 1; 
+  novo_hash->tamanho = TAMANHO_MAXIMO; 
   return novo_hash;
 }
 
