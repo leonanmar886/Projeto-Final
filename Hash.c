@@ -98,8 +98,9 @@ void inserir_tabela( Viagem* t[],Viagem* viagem, TabelaViagem* tabela){
   int id = funcaoHash(codigo_hash(viagem),tabela);
   
   if(t[id]==NULL){// insere apenas quando nulo para não haver colisão
+   t[id] = viagem;
    tabela->tabela_hash = t[id];
-   tabela->tamanho++; 
+  // tabela->tamanho++; 
     }  
 }
 Viagem* busca(Viagem* t[], Viagem* viagem, TabelaViagem* tabela){
