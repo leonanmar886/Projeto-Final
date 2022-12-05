@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TAMANHO_MAXIMO 10
+//#define TAMANHO_MAXIMO 10
 typedef struct viagem Viagem;
 typedef struct tabela_viagem TabelaViagem;
 typedef struct trecho Trecho;
@@ -55,12 +55,12 @@ int eh_primo(int valor){
   }
   return 1;
 }
-TabelaViagem* cria_hash(){
+TabelaViagem* cria_hash(int size){
   
   TabelaViagem* novo_hash = (TabelaViagem*)malloc(sizeof(TabelaViagem));
 
   novo_hash->tabela_hash = NULL;
-  novo_hash->tamanho = TAMANHO_MAXIMO; 
+  novo_hash->tamanho = size; 
   return novo_hash;
 }
 
@@ -86,20 +86,20 @@ int codigo_hash(Viagem* lista){
   return soma;
 }
 
-int funcaoHash(int valor, TabelaViagem* tabela){
+int funcaoHash(int codigo_hash, TabelaViagem* tabela){
   int tamanho = (tabela->tamanho*2)+1;
   while(eh_primo(tamanho) == 0){
     tamanho++;
   }
-  return valor%tamanho;
+  return codigo_hash%tamanho;
 }
 
-void inserir_tabela( Viagem* t[],Viagem* viagem, TabelaViagem* tabela){
+void inserir_tabela( Viagem* tab[],Viagem* viagem, TabelaViagem* tabela){
   int id = funcaoHash(codigo_hash(viagem),tabela);
   
-  if(t[id]==NULL){// insere apenas quando nulo para não haver colisão
-   t[id] = viagem;
-   tabela->tabela_hash = t[id];
+  if(tab[id] == NULL){// insere apenas quando nulo para não haver colisão
+   tab[id] = viagem;
+   tabela->t[id] = tab[id];
   // tabela->tamanho++; 
     }  
 }
