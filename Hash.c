@@ -11,12 +11,19 @@ struct data {
   int mes;
   int ano;
 };
-
 struct passageiro {
   int id;
   char nome[100];
   char endereco[100];
 };
+
+struct voo {
+  int codigo;
+  char origem[100];
+  char destino[100];
+};
+
+
 
 
 struct reserva {
@@ -63,6 +70,7 @@ TabelaViagem* cria_hash(int size){
   novo_hash->tamanho = size; 
   return novo_hash;
 }
+
 
 void inicializar_tabela( Viagem* roteiros[], TabelaViagem* tabela){
   int size  = (tabela->tamanho*2)+1;
@@ -114,3 +122,51 @@ Viagem* busca_tabela(Viagem* roteiros[], Viagem* viagem, TabelaViagem* tabela){
   }
   return NULL;
 }
+
+// retira um roteiro de viagem da Tabela e atribui NULL, retorna NULL caso já for NULL
+//, e o roteiro caso contrário
+
+Viagem* retira_hash(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem ){
+  int id = funcaoHash(codigo_hash(viagem),tabela);
+   Viagem* aux[tabela->tamanho];
+  if(roteiros[id] == NULL){
+    return NULL;
+  } 
+  else{
+    
+   aux[id] = roteiros[id];
+    roteiros[id] = NULL;
+  }
+  return aux[id];
+}
+
+//
+int libera_hash(TabelaViagem** tabela){
+  if(tabela == NULL) return 0;
+  
+  free(*tabela);
+  *tabela = NULL;
+  return 1;
+}
+
+void imprimir_viagem(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem){
+  int id = funcaoHash(codigo_hash(viagem),tabela);
+   
+  Trecho* aux = roteiros[id]->primeiro_trecho ;
+  int ordem = 1;
+  printf("\tINTINERÁRIO DA VIAGEM:\n");
+  while(aux!=NULL){
+    
+   printf("**************************************\n");
+   printf("\t Reserva %d",ordem)/ 
+   printf("Codigo da reserva: %d\n", aux->reserva->codigo);
+   printa_data(aux->reserva->data_viagem);
+   printf("Codigo do Voo: %d\n",aux->reserva->voo->codigo);
+   printf("Nome do passageiro: %s\n", aux->reserva->passageiro->nome);
+   printf("Id do passageiro: %d\n", aux->reserva->passageiro->id); 
+   printf("Endereço do passageiro: %s\n", aux->reserva->passageiro->endereco);
+   ordem++;  
+   aux = aux->proximo;
+  }
+}
+

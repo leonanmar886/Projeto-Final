@@ -30,6 +30,8 @@ int assento_tamanho();
 //Cria uma nova Data com os parametros passados
 Data* data_nova(int dia, int mes, int ano);
 
+// Exibe a data usando printf
+void printa_data(Data* data);
 
 int data_inteiro(Data* data); // Retorna um inteiro referente ao número de dias da data
 
