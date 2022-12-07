@@ -273,4 +273,18 @@ Agenda *Sucessor(Agenda *agenda);
 
 Agenda *Minimo (Agenda *agenda);
 
+int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino);
+
 Trecho* trecho_cria(Reserva* reserva);
+
+Viagem* lista_viagem_cria();
+
+Reserva* lista_viagem_busca(Viagem* viagem, int codigo);
+
+int lista_viagem_insere(Viagem* viagem, Reserva* reserva);
+
+int lista_viagem_vazia(Viagem* viagem);
+
+Trecho* lista_viagem_primeiro(Viagem* viagem);
+
+Trecho* lista_viagem_retira(Viagem* viagem);
