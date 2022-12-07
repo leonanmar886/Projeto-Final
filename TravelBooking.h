@@ -69,6 +69,9 @@ int passageiro_igual(Passageiro *passageiro1, Passageiro *passageiro2);
 int passageiro_tamanho();
 
 // *********************** FilaPassageiro.h ********************
+
+struct no_passageiro* no_passageiro_cria(Passageiro* passageiro);
+
 /* Aloca espaço em memória e retorna uma ListaPassageiro ok */
 ListaPassageiro *fila_passageiro_cria();
 
@@ -140,6 +143,8 @@ int voo_igual(Voo *Voo1, Voo *Voo2);
 int voo_tamanho();
 
 // ******************** FilaVoo.h **********************
+
+struct no_voo* no_voo_cria(Voo* voo);
 
 /* Aloca espaço em memória e retorna uma ListaVoo ok */
 ListaVoo *fila_voo_cria();
@@ -268,3 +273,6 @@ Agenda *Sucessor(Agenda *agenda);
 
 Agenda *Minimo (Agenda *agenda);
 
+
+
+Trecho* trecho_cria(Reserva* reserva, Trecho* proximo_trecho);

@@ -202,6 +202,12 @@ int passageiro_tamanho(){
 
 typedef struct no_passageiro No_Passageiro;
 
+No_Passageiro* no_passageiro_cria(Passageiro* passageiro){
+    No_Passageiro* novo =(No_Passageiro*) malloc(sizeof(No_Passageiro));
+    novo->passageiro = passageiro;
+    novo->proximo = NULL;
+}
+
 ListaPassageiro* fila_passageiro_cria(){
   ListaPassageiro* nova_lista = (ListaPassageiro *)malloc(sizeof(ListaPassageiro));
    nova_lista->primeiro = NULL;
@@ -261,9 +267,7 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
     
   }
   if (lista->primeiro == NULL){
-    No_Passageiro* novo =(No_Passageiro*) malloc(sizeof(No_Passageiro));
-    novo->passageiro = passa;
-    novo->proximo = NULL;
+    No_Passageiro* novo = no_passageiro_cria(passa);
     lista->primeiro = novo;
   }
   else {
@@ -271,9 +275,7 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
     while( ultimo->proximo != NULL){
       ultimo = ultimo->proximo;
     }
-  No_Passageiro* novo = (No_Passageiro *)malloc(sizeof(No_Passageiro));
-  novo->passageiro = passa;
-  novo->proximo = NULL;
+  No_Passageiro* novo = no_passageiro_cria(passa);
   ultimo->proximo = novo;  
     
   }
@@ -406,6 +408,13 @@ int voo_tamanho(){
 
 typedef struct no_voo No_Voo;
 
+No_Voo* no_voo_cria(Voo* voo){
+  No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
+  novo->voo = voo;
+  novo->proximo = NULL;
+  return novo;
+}
+
 ListaVoo* fila_voo_cria() {
   ListaVoo *nova_lista = (ListaVoo *) malloc(sizeof(ListaVoo));
   nova_lista->primeiro = NULL;
@@ -459,9 +468,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
     
   }
   if (lista->primeiro == NULL){
-    No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
-    novo->voo = voo;
-    novo->proximo = NULL;
+    No_Voo* novo = no_voo_cria(voo);
     lista->primeiro = novo;
   }
   else {
@@ -469,9 +476,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
     while (ultimo->proximo != NULL){
       ultimo = ultimo->proximo;
     }
-  No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
-  novo->voo = voo;
-  novo->proximo = NULL;
+  No_Voo* novo = no_voo_cria(voo);
   ultimo->proximo = novo;
     
   }
@@ -625,7 +630,7 @@ Agenda* criar_no_agenda(Data* chave, Reserva* conteudo) {
   else{
     return NULL;
   }
- no_agenda->data = chave;
+  no_agenda->data = chave;
   no_agenda->reserva = conteudo;
   no_agenda->esq = NULL;
   no_agenda->dir = NULL;

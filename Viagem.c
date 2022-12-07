@@ -102,6 +102,8 @@ Viagem* lista_viagem_cria(){
   return novo_roteiro;
 }
 
+
+
 int lista_viagem_libera(Viagem** lista_roteiro){
   if(lista_roteiro != NULL){
     if((*lista_roteiro)->primeiro_trecho != NULL){
@@ -118,7 +120,7 @@ int lista_viagem_libera(Viagem** lista_roteiro){
   return 0;
 }
 
-Reserva* lista_reserva_busca(Viagem* lista, int codigo){
+Reserva* lista_viagem_busca(Viagem* lista, int codigo){
   if(lista != NULL && lista->primeiro_trecho!=NULL){
 
     Trecho* x = lista->primeiro_trecho;
@@ -191,7 +193,7 @@ Reserva* lista_viagem_primeiro(Viagem* lista){
   return lista->primeiro_trecho->reserva;
 }
 
-Reserva* lista_reserva_retira(Viagem* lista){
+Reserva* lista_viagem_retira(Viagem* lista){
   if(lista == NULL || lista->primeiro_trecho == NULL){
     return NULL;
   }
