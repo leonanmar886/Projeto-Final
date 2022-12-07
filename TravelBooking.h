@@ -273,6 +273,4 @@ Agenda *Sucessor(Agenda *agenda);
 
 Agenda *Minimo (Agenda *agenda);
 
-
-
-Trecho* trecho_cria(Reserva* reserva, Trecho* proximo_trecho);
+Trecho* trecho_cria(Reserva* reserva);

@@ -255,7 +255,8 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
   if(lista == NULL || passa == NULL){
     return -1;
   }
-  if(lista->primeiro!= NULL){
+  
+  if(lista->primeiro != NULL){
     int id;
     char nome[50];
     char end[100];
@@ -264,22 +265,20 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
     if(aux != NULL){
       return 0;
     }
-    
-  }
-  if (lista->primeiro == NULL){
-    No_Passageiro* novo = no_passageiro_cria(passa);
-    lista->primeiro = novo;
-  }
-  else {
     No_Passageiro* ultimo = lista->primeiro;
-    while( ultimo->proximo != NULL){
+    while(ultimo->proximo != NULL){
       ultimo = ultimo->proximo;
     }
-  No_Passageiro* novo = no_passageiro_cria(passa);
-  ultimo->proximo = novo;  
+    No_Passageiro* novo = no_passageiro_cria(passa);
+    ultimo->proximo = novo;
+    return 1;
     
   }
-  return 1;
+  else if (lista->primeiro == NULL){
+    No_Passageiro* novo = no_passageiro_cria(passa);
+    lista->primeiro = novo;
+    return 1;
+  }
   
 }
 //
@@ -465,23 +464,19 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
     if(aux != NULL){
       return 0;
     }
-    
-  }
-  if (lista->primeiro == NULL){
-    No_Voo* novo = no_voo_cria(voo);
-    lista->primeiro = novo;
-  }
-  else {
     No_Voo* ultimo = lista->primeiro;
     while (ultimo->proximo != NULL){
       ultimo = ultimo->proximo;
     }
-  No_Voo* novo = no_voo_cria(voo);
-  ultimo->proximo = novo;
-    
+    No_Voo* novo = no_voo_cria(voo);
+    ultimo->proximo = novo;
+    return 1;    
   }
-  return 1;
-  
+  else if (lista->primeiro == NULL){
+    No_Voo* novo = no_voo_cria(voo);
+    lista->primeiro = novo;
+    return 1;
+  }
 }
 
 

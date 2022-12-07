@@ -17,13 +17,6 @@ struct reserva {
 };
 
 int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino){
-    Reserva* reserva_origem_aux;
-    Reserva* reserva_origem_proximo_aux2;
-    Reserva* reserva_destino_aux;
-    Reserva* reserva_destino_proximo_aux2;
-
-    trecho_acessa(trecho_origem, reserva_origem_aux, reserva_origem_proximo_aux2);
-    trecho_acessa(trecho_origem, reserva_destino_aux, reserva_destino_proximo_aux2);
 
     int codigo_trecho_origem;
     Data *data_trecho_origem;
@@ -37,12 +30,12 @@ int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino){
     Voo *voo_trecho_destino;
     Assento assento_trecho_destino;
 
-    reserva_acessa(reserva_origem_aux, &(codigo_trecho_origem), &(data_trecho_origem), &(passageiro_trecho_origem), &(voo_trecho_origem), &(assento_trecho_origem));
-    reserva_acessa(reserva_destino_aux, &(codigo_trecho_destino), &(data_trecho_destino), &(passageiro_trecho_destino), &(voo_trecho_destino), &(assento_trecho_destino));
+    reserva_acessa(trecho_origem -> reserva , &(codigo_trecho_origem), &(data_trecho_origem), &(passageiro_trecho_origem), &(voo_trecho_origem), &(assento_trecho_origem));
+    reserva_acessa(trecho_destino -> reserva , &(codigo_trecho_destino), &(data_trecho_destino), &(passageiro_trecho_destino), &(voo_trecho_destino), &(assento_trecho_destino));
 
     if(data_inteiro(data_trecho_origem) < data_inteiro(data_trecho_destino)){
-        if(passageiro_trecho_origem->id == passageiro_trecho_destino->id){
-            if(strcmp(voo_trecho_origem->destino, voo_trecho_destino->origem) == 0){
+        if(passageiro_trecho_origem -> id == passageiro_trecho_destino->id){
+            if(strcmp(voo_trecho_origem -> destino, voo_trecho_destino->origem) == 0){
                 return 1;
             }
         }
@@ -51,20 +44,14 @@ int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino){
     
 }
 
-Trecho* trecho_cria(Reserva* reserva, Trecho* proximo_trecho){
+Trecho* trecho_cria(Reserva* reserva){
     if (reserva == NULL){
         return NULL;
     }
     Trecho* trecho = (Trecho*) malloc(sizeof(Trecho));
     trecho -> reserva = reserva;
-    if (proximo_trecho != NULL){
-        if (trecho_valido(trecho, proximo_trecho) == 1){
-            trecho -> proximo = proximo_trecho;
-        }
-    }
-    else{
-        trecho -> proximo = NULL;
-    }
+    trecho -> proximo = NULL;
+
     return trecho;
 }
 

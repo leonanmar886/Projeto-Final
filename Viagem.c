@@ -96,34 +96,31 @@ return 0;
 }
 
 Viagem* lista_viagem_cria(){
-  
-  Viagem* novo_roteiro = (Viagem*) malloc(sizeof(Viagem));
-  novo_roteiro->primeiro_trecho = NULL;
-  return novo_roteiro;
+  Viagem* viagem = (Viagem*) malloc(sizeof(Viagem));
+  viagem ->primeiro_trecho = NULL;
+  return viagem;
 }
 
-
-
-int lista_viagem_libera(Viagem** lista_roteiro){
-  if(lista_roteiro != NULL){
-    if((*lista_roteiro)->primeiro_trecho != NULL){
-      Trecho* aux = (*lista_roteiro)->primeiro_trecho;
+int lista_viagem_libera(Viagem** viagem){
+  if(viagem != NULL){
+    if((*viagem)->primeiro_trecho != NULL){
+      Trecho* aux = (*viagem)->primeiro_trecho;
       do{
         reserva_libera(&aux->reserva);
         aux = aux->proximo;
       } while(aux != NULL);
     }
-    free(*lista_roteiro);
-    *lista_roteiro = NULL;
+    free(*viagem);
+    *viagem = NULL;
     return 1;
   }
   return 0;
 }
 
-Reserva* lista_viagem_busca(Viagem* lista, int codigo){
-  if(lista != NULL && lista->primeiro_trecho!=NULL){
+Reserva* lista_viagem_busca(Viagem* viagem, int codigo){
+  if(viagem != NULL && viagem->primeiro_trecho!=NULL){
 
-    Trecho* x = lista->primeiro_trecho;
+    Trecho* x = viagem->primeiro_trecho;
     int codigo_aux;
     Data* data;
     Passageiro* passageiro;
@@ -140,65 +137,64 @@ Reserva* lista_viagem_busca(Viagem* lista, int codigo){
   return NULL;
 }
 
-int lista_viagem_insere(Viagem* lista, Reserva* reserva){
-  if(lista == NULL || reserva == NULL || verifica_casos(lista) == 1){
+int lista_viagem_insere(Viagem* viagem, Reserva* reserva){
+  if(viagem == NULL || reserva == NULL){
     return -1;
   }
-  if(lista->primeiro_trecho!= NULL){
+  if(viagem -> primeiro_trecho != NULL){
     int codigo;
     Data* data;
     Passageiro* passageiro;
     Voo* voo;
     Assento assento;
     reserva_acessa(reserva, &codigo, &data, &passageiro, &voo, &assento);
-    Reserva* aux = lista_reserva_busca(lista, codigo);
+    Reserva* aux = lista_viagem_busca(viagem, codigo);
 
     if(aux != NULL){
       return 0;
     }
+
+    Trecho* trecho_novo = trecho_cria(reserva);
+
+    Trecho* trecho_aux = viagem -> primeiro_trecho;
+    while(trecho_aux -> proximo != NULL){
+      trecho_aux = trecho_aux -> proximo;
+    }
+    if(trecho_valido(trecho_aux, trecho_novo) == 1){
+      trecho_aux -> proximo = trecho_novo;
+      return 1;
+    }
   }
-    if(lista->primeiro_trecho == NULL){
-      Trecho* novo = (Trecho*) malloc(sizeof(Trecho));
-      novo->reserva = reserva;
-      novo->proximo = NULL;
-      lista->primeiro_trecho = novo;
-    }
-    else{
-      Trecho* ultimo = lista->primeiro_trecho;
-      while(ultimo->proximo != NULL){
-        ultimo = ultimo->proximo;
-      }
-      Trecho* novo = (Trecho*)malloc(sizeof(Trecho));
-      novo->reserva = reserva;
-      novo->proximo = NULL;
-      ultimo->proximo = novo;
-    }
-  return 1;
+  else if (viagem -> primeiro_trecho == NULL){
+    Trecho* trecho_novo = trecho_cria(reserva);
+    viagem -> primeiro_trecho = trecho_novo;
+    return 1;
+  }
 }
 
-int lista_viagem_vazia(Viagem* lista){
-  if(lista == NULL){
+int lista_viagem_vazia(Viagem* viagem){
+  if(viagem == NULL){
     return -1;
   }
-  if(lista->primeiro_trecho == NULL){
+  if(viagem->primeiro_trecho == NULL){
     return 1;
   }
   return 0;
 }
 
-Reserva* lista_viagem_primeiro(Viagem* lista){
-  if(lista == NULL || lista->primeiro_trecho->reserva == NULL){
+Trecho* lista_viagem_primeiro(Viagem* viagem){
+  if(viagem == NULL || viagem -> primeiro_trecho == NULL){
     return NULL;
   }
-  return lista->primeiro_trecho->reserva;
+  return viagem -> primeiro_trecho;
 }
 
-Reserva* lista_viagem_retira(Viagem* lista){
-  if(lista == NULL || lista->primeiro_trecho == NULL){
+Trecho* lista_viagem_retira(Viagem* viagem){
+  if(viagem == NULL || viagem->primeiro_trecho == NULL){
     return NULL;
   }
-  Reserva* primeira_reserva = lista->primeiro_trecho->reserva;
-  lista->primeiro_trecho = lista->primeiro_trecho->proximo;
+  Trecho* primeiro_trecho_aux = viagem->primeiro_trecho;
+  viagem->primeiro_trecho = viagem->primeiro_trecho->proximo;
   
-  return primeira_reserva;
+  return primeiro_trecho_aux;
 }
