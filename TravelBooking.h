@@ -238,7 +238,7 @@ int libera_no_agenda(Agenda* no);
 Agenda* insere_no_agenda (Agenda* raiz, Agenda* no);
 
 /* Retorna o conteúdo do no ou NULL caso o nó seja NULL. */
-Reserva* conteudo_agenda( Agenda* no);
+Reserva* conteudo_agenda(Agenda* no);
 
 /* Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em
  * caso contrário. */

@@ -46,8 +46,7 @@ struct viagem {
 
 struct tabela_viagem {
   int tamanho;
-  //Viagem *tabela_hash;
-  Viagem* t[];
+  Viagem **tabela_hash;
 };
 
 int eh_primo(int valor){
@@ -62,27 +61,28 @@ int eh_primo(int valor){
   }
   return 1;
 }
-TabelaViagem* cria_hash(int size){
+
+TabelaViagem* cria_hash(int tamanho){
   
   TabelaViagem* novo_hash = (TabelaViagem*)malloc(sizeof(TabelaViagem));
-  novo_hash->t[0] = NULL;
-  //novo_hash->tabela_hash = NULL;
-  novo_hash->tamanho = size; 
+  Viagem* vetor = (Viagem*) malloc(sizeof(Viagem*) * tamanho);
+  novo_hash -> tabela_hash = vetor;
+  novo_hash->tamanho = tamanho; 
   return novo_hash;
 }
 
 
-void inicializar_tabela( Viagem* roteiros[], TabelaViagem* tabela){
-  int size  = (tabela->tamanho*2)+1;
+void inicializar_tabela(Viagem* roteiros, TabelaViagem* tabela){
+  int size  = ((tabela -> tamanho)*2)+1;
   while(eh_primo(size) == 0){
     size++;
   }
+
   tabela->tamanho = size;
  
-  for(int i=0;i < tabela->tamanho; i++){
-    roteiros[i] = NULL;
-  }
-  tabela->t[0] = roteiros[0]; 
+  for(int i=0; i < tabela->tamanho; i++){
+    tabela -> tabela_hash[i] = NULL;
+  } 
 }
 
 int codigo_hash(Viagem* lista){
@@ -103,20 +103,20 @@ int funcaoHash(int codigoHash, TabelaViagem* tabela){
   return codigoHash % tabela->tamanho;
 }
 
-int inserir_tabela( Viagem* roteiros[],Viagem* viagem, TabelaViagem* tabela){
+int inserir_tabela(Viagem* viagem, TabelaViagem* tabela){
   int id = funcaoHash(codigo_hash(viagem),tabela);
   
-  if(roteiros[id] == NULL){// insere apenas quando nulo para não haver colisão
-   roteiros[id] = viagem;
-   tabela->t[id] = roteiros[id];
+  if(tabela -> tabela_hash[id] == NULL){// insere apenas quando nulo para não haver colisão
+   tabela -> tabela_hash[id] = &(viagem);
    return 1;
     }  
   return 0;
 }
-Viagem* busca_tabela(Viagem* roteiros[], Viagem* viagem, TabelaViagem* tabela){
+
+Viagem* busca_tabela(Viagem* viagem, TabelaViagem* tabela){
   int id = funcaoHash(codigo_hash(viagem),tabela);
-  if(roteiros[id]!= NULL){
-    if(roteiros[id] == viagem ){
+  if(tabela->tabela_hash[id]!= NULL){
+    if(tabela->tabela_hash[id] == viagem ){
       return viagem;
     }
   }
@@ -126,18 +126,18 @@ Viagem* busca_tabela(Viagem* roteiros[], Viagem* viagem, TabelaViagem* tabela){
 // retira um roteiro de viagem da Tabela e atribui NULL, retorna NULL caso já for NULL
 //, e o roteiro caso contrário
 
-Viagem* retira_hash(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem ){
+Viagem* retira_hash(TabelaViagem* tabela, Viagem* viagem ){
   int id = funcaoHash(codigo_hash(viagem),tabela);
-   Viagem* aux[tabela->tamanho];
-  if(roteiros[id] == NULL){
+   Viagem* aux;
+  if(tabela -> tabela_hash[id] == NULL){
     return NULL;
   } 
   else{
     
-   aux[id] = roteiros[id];
-    roteiros[id] = NULL;
+    aux = tabela -> tabela_hash[id];
+    tabela -> tabela_hash[id] = NULL;
   }
-  return aux[id];
+  return aux;
 }
 
 //

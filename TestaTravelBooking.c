@@ -1226,17 +1226,21 @@ float teste_viagem_insere() {
 
     Data *data1 = data_nova(16, 4, 2023);
     Data *data2 = data_nova(12, 12, 2021);
+    Data *data3 = data_nova(12, 12, 2024);
     Assento assento1 = A0;
     Assento assento2 = B7;
     Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
     Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
     Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
     Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
+    Voo *voo3 = voo_novo(12, "Londres", "Buenos Aires");
 
     Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
     Reserva *reserva2 = reserva_nova(1, data2, passageiro2, voo2, assento2);
+    Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento2);
 
-    if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 0 && lista_viagem_insere(viagem, NULL) == -1) {
+
+    if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 0 && lista_viagem_insere(viagem, NULL) == -1 && lista_viagem_insere(viagem, reserva3) == 1) {
         printf("[Passou] - viagem_insere()\n");
         return 1;
     } else {
@@ -1289,21 +1293,21 @@ float testa_viagem_busca() {
     Viagem *viagem = lista_viagem_cria();
     if (viagem != NULL) {
         Data *data1 = data_nova(16, 4, 2023);
-        Data *data2 = data_nova(12, 12, 2021);
-        Data *data3 = data_nova(07, 12, 2021);
+        Data *data2 = data_nova(12, 12, 2023);
+        Data *data3 = data_nova(7, 12, 2024);
         Assento assento1 = A0;
         Assento assento2 = B7;
         Assento assento3 = C7;
         Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
-        Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+        Passageiro *passageiro2 = passageiro_novo(2, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
         Passageiro *passageiro3 = passageiro_novo(3, "Yara Vasconcelos", "Av. Beira Mar, 1998");
         Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
-        Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
-        Voo *voo3 = voo_novo(92, "Dacar", "Gaborone");
+        Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+        Voo *voo3 = voo_novo(92, "Buenos Aires", "Gaborone");
 
         Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
-        Reserva *reserva2 = reserva_nova(2, data2, passageiro2, voo2, assento2);
-        Reserva *reserva3 = reserva_nova(3, data3, passageiro3, voo3, assento3);
+        Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento2);
+        Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento3);
 
         lista_viagem_insere(viagem, reserva1);
         lista_viagem_insere(viagem, reserva2);
@@ -1312,16 +1316,16 @@ float testa_viagem_busca() {
         Reserva *aux = lista_viagem_busca(viagem, 2);
         if (aux != NULL) {
             if (reserva_igual(aux, reserva2) == 1 && lista_viagem_busca(NULL, -1) == NULL) {
-                printf("[Passou] - fila_voo_busca()\n");
+                printf("[Passou] - viagem_busca()\n");
                 return 1;
             } else {
-                printf("[Falhou] - fila_voo_busca()\n");
+                printf("[Falhou] - viagem_busca()\n");
             }
         } else {
-            printf("[Falhou] - fila_voo_busca()\n");
+            printf("[Falhou] - viagem_busca()\n");
         }
     } else {
-        printf("[Falhou] - fila_voo_busca()\n");
+        printf("[Falhou] - viagem_busca()\n");
     }
     return 0;
 }
@@ -1330,8 +1334,8 @@ float teste_viagem_retira() {
     Viagem *viagem = lista_viagem_cria();
     if (viagem != NULL) {
         Data *data1 = data_nova(16, 4, 2023);
-        Data *data2 = data_nova(12, 12, 2021);
-        Data *data3 = data_nova(07, 12, 2021);
+        Data *data2 = data_nova(12, 12, 2023);
+        Data *data3 = data_nova(7, 12, 2024);
         Assento assento1 = A0;
         Assento assento2 = B7;
         Assento assento3 = C7;
@@ -1339,12 +1343,12 @@ float teste_viagem_retira() {
         Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
         Passageiro *passageiro3 = passageiro_novo(3, "Yara Vasconcelos", "Av. Beira Mar, 1998");
         Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
-        Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
-        Voo *voo3 = voo_novo(92, "Dacar", "Gaborone");
+        Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+        Voo *voo3 = voo_novo(92, "Buenos Aires", "Gaborone");
 
         Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
-        Reserva *reserva2 = reserva_nova(2, data2, passageiro2, voo2, assento2);
-        Reserva *reserva3 = reserva_nova(3, data3, passageiro3, voo3, assento3);
+        Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento2);
+        Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento3);
 
         lista_viagem_insere(viagem, reserva1);
         lista_viagem_insere(viagem, reserva2);

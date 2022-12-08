@@ -979,27 +979,6 @@ void imprimir_viagem(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem){
 
 // Retorna 1 se as reserva não são do mesmo passageiro, ou se as datas das reservas não estão numa ordem 
 // cronológica plausível, ou se as datas de inicial e fim da viagem são coincidentes, caso contrário retorna 0
-int verifica_casos(Viagem* roteiro){
- if(roteiro == NULL ) return -1;
-  
-  Trecho* aux1 = roteiro->primeiro_trecho;
-  Trecho* aux2 = aux1;
-  while(aux1 != NULL){
-    if(aux1->proximo != NULL){
-     if(aux1->reserva->passageiro->id != aux1->proximo->reserva->passageiro->id ||
-       data_inteiro(aux1->reserva->data_viagem)  > data_inteiro(aux1->proximo->reserva->data_viagem))
-       {
-      return 1;
-    }            
-      }
-    if(aux1->proximo == NULL){
-        if (data_inteiro(aux1->reserva->data_viagem) == data_inteiro(aux2->reserva->data_viagem))
-          return 1;
-      }
-    aux1 = aux1->proximo;
-  }
-return 0;
-}
 
 Viagem* lista_viagem_cria(){
   Viagem* viagem = (Viagem*) malloc(sizeof(Viagem));
@@ -1192,15 +1171,8 @@ int trecho_igual(Trecho* trecho1, Trecho* trecho2){
         return -1;
     }
     
-    Reserva* reserva1 = (Reserva*) malloc(sizeof(Reserva));
-    Trecho* proximo_trecho1 = (Trecho*) malloc(sizeof(Trecho));
-    Reserva* reserva2 = (Reserva*) malloc(sizeof(Reserva));
-    Trecho* proximo_trecho2 = (Trecho*) malloc(sizeof(Trecho));
-    trecho_acessa(trecho1, reserva1, proximo_trecho1);
-    trecho_acessa(trecho2, reserva2, proximo_trecho2);
 
-    int igualdade = reserva_igual(reserva1, reserva2);
-
+    int igualdade = reserva_igual(trecho1 -> reserva, trecho2->reserva);
     return igualdade;
 
 }
