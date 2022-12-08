@@ -198,7 +198,7 @@ int passageiro_tamanho(){
   return sizeof(Passageiro);
 }
 
-// ******************* FilaPassageiro.c ****************
+// ******************* ListaPassageiro.c ****************
 
 typedef struct no_passageiro No_Passageiro;
 
@@ -208,14 +208,14 @@ No_Passageiro* no_passageiro_cria(Passageiro* passageiro){
     novo->proximo = NULL;
 }
 
-ListaPassageiro* fila_passageiro_cria(){
+ListaPassageiro* lista_passageiro_cria(){
   ListaPassageiro* nova_lista = (ListaPassageiro *)malloc(sizeof(ListaPassageiro));
    nova_lista->primeiro = NULL;
   return nova_lista;
   
 }
 
-int fila_passageiro_libera(ListaPassageiro **lista){
+int lista_passageiro_libera(ListaPassageiro **lista){
   if(lista != NULL){
     if((*lista)->primeiro != NULL){
       No_Passageiro* aux = (*lista)->primeiro;
@@ -231,7 +231,7 @@ int fila_passageiro_libera(ListaPassageiro **lista){
   return 0;
 }
 
-Passageiro* fila_passageiro_busca(ListaPassageiro* lista, int id){
+Passageiro* lista_passageiro_busca(ListaPassageiro* lista, int id){
   if (lista!=NULL && lista->primeiro!=NULL){
     
     
@@ -241,7 +241,7 @@ Passageiro* fila_passageiro_busca(ListaPassageiro* lista, int id){
   char nome[100];
   char end[150];
   do{
-passageiro_acessa(x->passageiro,&id_aux,nome,end);
+  passageiro_acessa(x->passageiro,&id_aux,nome,end);
   if(id == id_aux){
       return x->passageiro;
     }
@@ -251,7 +251,7 @@ passageiro_acessa(x->passageiro,&id_aux,nome,end);
   return NULL;
 }
 
-int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
+int lista_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
   if(lista == NULL || passa == NULL){
     return -1;
   }
@@ -261,7 +261,7 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
     char nome[50];
     char end[100];
     passageiro_acessa(passa, &id, nome, end);
-    Passageiro *aux = fila_passageiro_busca(lista, id);
+    Passageiro *aux = lista_passageiro_busca(lista, id);
     if(aux != NULL){
       return 0;
     }
@@ -282,17 +282,35 @@ int fila_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
   
 }
 //
-Passageiro* fila_passageiro_retira(ListaPassageiro* lista){
-  if(lista == NULL ||lista->primeiro == NULL){
+Passageiro* lista_passageiro_retira(ListaPassageiro* lista, int id){
+  if(lista == NULL || lista->primeiro == NULL){
     return NULL;
   }
-  Passageiro* viajante = lista->primeiro->passageiro;
-  lista->primeiro = lista->primeiro->proximo;
-  return viajante;
+  No_Passageiro* no_passageiro = lista -> primeiro;
+  int id_aux;
+  char nome_aux[100];
+  char endereco_aux[100];
+  passageiro_acessa(no_passageiro -> passageiro, &id_aux, nome_aux, endereco_aux);
+  No_Passageiro* ultimo;
+  while(no_passageiro != NULL && id_aux != id){
+    ultimo = no_passageiro;
+    no_passageiro = no_passageiro -> proximo;
+    passageiro_acessa(no_passageiro -> passageiro, &id_aux, nome_aux, endereco_aux);
+  }
+  if (no_passageiro == NULL){
+    return NULL;
+  }
+  if (lista -> primeiro == no_passageiro){
+    lista -> primeiro = no_passageiro -> proximo;
+  }
+  ultimo -> proximo = no_passageiro -> proximo;
+  Passageiro* passageiro_retirado = no_passageiro -> passageiro;
+  
+  return passageiro_retirado;
 }
 // Retorna -1 se a lista for nulo, retorna 1 se a lista for vazia, e retorna
 // 0 caso contrário
-int fila_passageiro_vazia(ListaPassageiro* lista){
+int lista_passageiro_vazia(ListaPassageiro* lista){
   if (lista==NULL){
     return -1;
   }
@@ -302,7 +320,7 @@ int fila_passageiro_vazia(ListaPassageiro* lista){
   return 0;
 }
 
-Passageiro* fila_passageiro_primeiro(ListaPassageiro* lista){
+Passageiro* lista_passageiro_primeiro(ListaPassageiro* lista){
   if(lista == NULL || lista->primeiro->passageiro ==NULL){
     return NULL;
   }
@@ -403,7 +421,7 @@ int voo_tamanho(){
   return sizeof(Voo);
 }
 
-// ********************* FilaVoo.c
+// ********************* listaVoo.c
 
 typedef struct no_voo No_Voo;
 
@@ -414,13 +432,13 @@ No_Voo* no_voo_cria(Voo* voo){
   return novo;
 }
 
-ListaVoo* fila_voo_cria() {
+ListaVoo* lista_voo_cria() {
   ListaVoo *nova_lista = (ListaVoo *) malloc(sizeof(ListaVoo));
   nova_lista->primeiro = NULL;
   return nova_lista;
 }
 
-int fila_voo_libera(ListaVoo **lista) {
+int lista_voo_libera(ListaVoo **lista) {
   if (lista != NULL) {
     free(*lista);
     *lista = NULL;
@@ -430,7 +448,7 @@ int fila_voo_libera(ListaVoo **lista) {
 }
 
 
-Voo* fila_voo_busca(ListaVoo *lista, int codigo) {
+Voo* lista_voo_busca(ListaVoo *lista, int codigo) {
   if(lista == NULL || lista->primeiro == NULL) {
     return NULL;
   }
@@ -450,7 +468,7 @@ Voo* fila_voo_busca(ListaVoo *lista, int codigo) {
   return NULL;
 }
 
-int fila_voo_insere(ListaVoo *lista, Voo *voo){
+int lista_voo_insere(ListaVoo *lista, Voo *voo){
   if(lista == NULL || voo == NULL){
     return -1;
   }
@@ -460,7 +478,7 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
     char origem[100];
     char destino[100];
     voo_acessa(voo, &codigo, origem, destino);
-    Voo *aux = fila_voo_busca(lista, codigo);
+    Voo *aux = lista_voo_busca(lista, codigo);
     if(aux != NULL){
       return 0;
     }
@@ -480,28 +498,45 @@ int fila_voo_insere(ListaVoo *lista, Voo *voo){
 }
 
 
-Voo* fila_voo_retira(ListaVoo* lista){
+Voo* lista_voo_retira(ListaVoo* lista, int codigo){
   if(lista == NULL || lista->primeiro == NULL){
     return NULL;
   }
-  Voo* voo = lista->primeiro->voo;
-  lista->primeiro = lista->primeiro->proximo;
-  return voo;
-}
-
-Voo *fila_voo_primeiro(ListaVoo *fila) {
-  if (fila_voo_vazia(fila) || fila == NULL){
+  No_Voo* no_voo = lista -> primeiro;
+  int codigo_aux;
+  char origem[100];
+  char destino[100];
+  voo_acessa(no_voo -> voo, &codigo_aux, origem, destino);
+  No_Voo* ultimo;
+  while(no_voo != NULL && codigo_aux != codigo){
+    ultimo = no_voo;
+    no_voo = no_voo -> proximo;
+    voo_acessa(no_voo -> voo, &codigo_aux, origem, destino);
+  }
+  if (no_voo == NULL){
     return NULL;
   }
-  Voo* ptr_1st_voo = fila->primeiro->voo; //testars
+  if (lista -> primeiro == no_voo){
+    lista -> primeiro = no_voo -> proximo;
+  }
+  ultimo -> proximo = no_voo -> proximo;
+  Voo* voo_retirado = no_voo -> voo;
+  return voo_retirado;
+}
+
+Voo *lista_voo_primeiro(ListaVoo *lista) {
+  if (lista_voo_vazia(lista) || lista == NULL){
+    return NULL;
+  }
+  Voo* ptr_1st_voo = lista->primeiro->voo; //testars
   return ptr_1st_voo;
 }
 
-int fila_voo_vazia(ListaVoo *fila){
-  if (fila == NULL){
+int lista_voo_vazia(ListaVoo *lista){
+  if (lista == NULL){
     return -1;
   }
-  if ((fila -> primeiro) == NULL){
+  if ((lista -> primeiro) == NULL){
     return 1;  
   }
   else{
@@ -509,13 +544,13 @@ int fila_voo_vazia(ListaVoo *fila){
   }
   }
 
-int fila_voo_quantidade(ListaVoo *fila) {
-    if (fila == NULL){
+int lista_voo_quantidade(ListaVoo *lista) {
+    if (lista == NULL){
       return -1;
     }
     else{
       int tamanho = 0;
-      No_Voo* aux = fila->primeiro;
+      No_Voo* aux = lista->primeiro;
       while (aux != NULL){
         aux = aux -> proximo;
         tamanho ++;
@@ -559,8 +594,8 @@ int reserva_libera(Reserva** reserva){
   
   return 1;
 }
-int verifica_reserva(Reserva *reserva,int codigo,Data *data,Passageiro *passageiro,Voo *voo, Assento assento){ // corrigir a função
-  if(codigo<1 || data == NULL || passageiro == NULL || voo == NULL || assento< 0 )
+int reserva_verifica(Reserva *reserva, int codigo,Data *data,Passageiro *passageiro,Voo *voo, Assento assento){ // corrigir a função
+  if(codigo < 1 || data == NULL || passageiro == NULL || voo == NULL || assento < 0 )
   {
     return -1;
   }
@@ -568,7 +603,7 @@ int verifica_reserva(Reserva *reserva,int codigo,Data *data,Passageiro *passagei
 }
 
 void reserva_acessa(Reserva *reserva, int *codigo, Data **data, Passageiro **passageiro, Voo **voo, Assento *assento){
-  if (reserva == NULL && verifica_reserva(reserva, reserva->codigo, reserva->data_viagem, reserva->passageiro, reserva->voo, reserva->assento)){ // corrigir
+  if (reserva == NULL && reserva_verifica(reserva, reserva->codigo, reserva->data_viagem, reserva->passageiro, reserva->voo, reserva->assento)){ // corrigir
     *codigo = -1;
     *data = NULL;
     *passageiro = NULL;
@@ -602,7 +637,7 @@ int reserva_tamanho() {
 }
 
 void reserva_atribui(Reserva *reserva, int codigo, Data *data_viagem, Passageiro *passageiro, Voo *voo, Assento assento) {
-  if (reserva!=NULL && verifica_reserva(reserva, codigo, data_viagem, passageiro, voo, assento)==1) {
+  if (reserva!=NULL && reserva_verifica(reserva, codigo, data_viagem, passageiro, voo, assento)==1) {
     if ((data_viagem->ano)>=2023 && (data_viagem->mes)>=1 && (data_viagem->dia)>=1) {
       reserva->codigo = codigo;
       reserva->data_viagem = data_viagem;
