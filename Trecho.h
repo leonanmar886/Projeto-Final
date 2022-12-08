@@ -24,3 +24,5 @@ void trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_
    (iii) Se um dos trechos for inválido ou NULL, a função retorna -1.
 */
 int trecho_igual(Trecho* trecho1, Trecho* trecho2);
+
+int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino);
