@@ -197,10 +197,9 @@ int reserva_tamanho();
 /* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
 
 
-
-
-// ************** ArvoreReserva.h *******************
+// ****************************** ArvoreReserva.h ********************
 /* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
+
 
 // Aloca e retorna um No com os dados passados por parâmetro. Retorna o nó criado ou NULL caso não seja posivel criar o nó.
 Agenda* criar_no_agenda(Data* chave, Reserva* conteudo);
@@ -220,48 +219,51 @@ Agenda *busca_agenda_codigo(Agenda *agenda_raiz, int codigo);
 // Procura a reserva do passageiro pelo id deste e pelo código do voo passados por parâmetro. Retorna o nó caso a busca obtenha sucesso ou NULL caso contrário.
 Agenda *abb_busca_agenda_passageiro_voo(Agenda *agenda_raiz, int id_passageiro, int codigo_voo);
 
-// Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em caso contrário.
+// Procura a reserva pelo id do passageiro e pela data da viagem. Retorna o nó caso a busca obtenha sucesso ou NULL em caso contrário.
 Agenda *abb_busca_agenda_data_passageiro(Agenda *agenda_raiz, int id_passageiro, Data* data_viagem);
 
-/* Remove o nó com a chave fornecida. Retorna a raiz da arvore atualizada ou
- * NULL em caso a raiz fornecida seja NULL. 
-*/
+// Remove o nó com a chave fornecida. Retorna a raiz da árvore atualizada ou NULL se a raiz fornecida for NULL. 
 Agenda* remove_no_agenda(Agenda* raiz, int codigo);
 
-/* Retorna a altura da árvore ou -1 caso a raiz seja NULL. */
+
+// Retorna a altura da árvore ou -1 caso a raiz seja NULL.
 int abb_altura(Agenda *agenda);
 
-/* Retorna o número de nós da árvore ou -1 caso araiz seja NULL. */
+// Retorna o número de nós da árvore ou -1 caso a raiz seja NULL.
 int abb_numero(Agenda *agenda);
 
-/* Retorna a chave do nó ou NULL caso o nó seja NULL.  */
+// Retorna a chave do nó ou NULL caso o nó seja NULL.
 int chave_agenda(Agenda* no);
 
-//Retorna o conteudo da reserva ou NULL caso a reserva seja NULL. *
+//Retorna o conteúdo da reserva ou NULL caso a reserva seja NULL.
 Reserva* conteudo_agenda(Agenda *agenda);
 
-/* Retorna o sucessor do nó */
+// Retorna o sucessor do nó fornecido como parâmetro.
 Agenda *Sucessor(Agenda *agenda);
 
-/* Retorna nó mínimo da agenda */
+// Retorna o nó mínimo da agenda.
 Agenda *Minimo (Agenda *agenda);
 
-/* Aloca espaço em memória e retorna uma ListaPassageiro */
+
+// Aloca espaço na memória e retorna uma ListaPassageiro.
 Viagem* lista_viagem_cria();
 
-/* Busca Voo pelo número de codigo. Retorna o Voo se este estiver na
- * lista e NULL caso contrário, isto é, (i) ListaVoo vazia; (ii) não exista Voo
- * com a codigo fornecida; ou (iii) a ListaVoo seja NULL ok */
+// Busca um Voo pelo número do código. Retorna o Voo se este estiver na lista e retorna NULL se a ListaVoo for vazia, se não existir o Voo com o código fornecido ou caso a ListaVoo for NULL. ok
 Reserva* lista_viagem_busca(Viagem* viagem, int codigo);
 
+// Insere uma reserva na ListaViagem. Retorna -1 se a viagem ou a reserva for NULL
 int lista_viagem_insere(Viagem* viagem, Reserva* reserva);
 
+//
 int lista_viagem_vazia(Viagem* viagem);
 
+//
 Trecho* lista_viagem_primeiro(Viagem* viagem);
 
+//
 Trecho* lista_viagem_retira(Viagem* viagem);
 
+//
 int lista_viagem_libera(Viagem** viagem);
 
 /* Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho.
