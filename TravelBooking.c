@@ -92,7 +92,7 @@ void printa_data(Data* data){
   mes = data->mes;
   ano = data->ano;
   
-  printf("Data da viagem: d%d/%d/%d\n",dia,mes,ano);
+  printf("Data da viagem: %d/%d/%d\n",dia,mes,ano);
 }
 // Retorna apenas um inteiro para ser a chave da data;
 int data_inteiro(Data* data){
@@ -992,8 +992,9 @@ Viagem* retira_hash(TabelaViagem* tabela, int indice){
     
     aux = (&(tabela -> tabela_hash))[indice];
     (&(tabela -> tabela_hash))[indice] = NULL;
-  }
-  return aux;
+    
+    }
+return aux;
 }
 
 //
@@ -1022,7 +1023,7 @@ void imprimir_viagem(TabelaViagem* tabela, int indice){
   while(aux!=NULL){
     
    printf("**************************************\n");
-   printf("\t Reserva %d",ordem)/ 
+   printf("\t Reserva %d\n",ordem); 
    printf("Codigo da reserva: %d\n", aux->reserva->codigo);
    printa_data(aux->reserva->data_viagem);
    printf("Codigo do Voo: %d\n",aux->reserva->voo->codigo);

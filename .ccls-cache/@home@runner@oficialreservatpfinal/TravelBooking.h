@@ -68,44 +68,47 @@ int passageiro_igual(Passageiro *passageiro1, Passageiro *passageiro2);
 /* Retorna o tamanho em bytes do TAD aluno. Ok */
 int passageiro_tamanho();
 
-// *********************** FilaPassageiro.h ********************
+// *********************** listaPassageiro.h ********************
+
+struct no_passageiro* no_passageiro_cria(Passageiro* passageiro);
+
 /* Aloca espaço em memória e retorna uma ListaPassageiro ok */
-ListaPassageiro *fila_passageiro_cria();
+ListaPassageiro *lista_passageiro_cria();
 
 /* Libera a memória de uma ListaPassageiro previamente criada e atribui NULL ao ponteiro
  * ListaPassageiro. Retorna 1 caso seja possível fazer a liberação e 0 caso a ListaPassageiro
  * informada seja NULL. ok */
-int fila_passageiro_libera(ListaPassageiro **ListaPassageiro);
+int lista_passageiro_libera(ListaPassageiro **ListaPassageiro);
 
 /* Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já
  * exista um Passageiro com a mesma id (nesse caso, o Passageiro não pode ser
  * adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL ok
  */
-int fila_passageiro_insere(ListaPassageiro *ListaPassageiro, Passageiro *Passageiro);
+int lista_passageiro_insere(ListaPassageiro *ListaPassageiro, Passageiro *Passageiro);
 
 /* Remove um Passageiro na ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja vazia ou
  * seja NULL ok */
-Passageiro *fila_passageiro_retira(ListaPassageiro *ListaPassageiro);
+Passageiro *lista_passageiro_retira(ListaPassageiro *ListaPassageiro, int id);
 
 /* Recupera o primeiro Passageiro da ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja
  * vazia ou seja NULL */
-Passageiro *fila_passageiro_primeiro(ListaPassageiro *ListaPassageiro);
+Passageiro *lista_passageiro_primeiro(ListaPassageiro *ListaPassageiro);
 
 /* Busca Passageiro pelo número de id. Retorna o Passageiro se este estiver na
  * lista e NULL caso contrário, isto é, (i) ListaPassageiro vazia; (ii) não exista Passageiro
  * com a id fornecida; ou (iii) a ListaPassageiro seja NULL ok */
-Passageiro *fila_passageiro_busca(ListaPassageiro *ListaPassageiro, int id);
+Passageiro *lista_passageiro_busca(ListaPassageiro *ListaPassageiro, int id);
 
 /* Verifica se a ListaPassageiro está vazia. Retorna 1 se a ListaPassageiro estiver vazia, 0 caso não
  * esteja vazia e -1 se a ListaPassageiro for NULL ok
  */
-int fila_passageiro_vazia(ListaPassageiro *ListaPassageiro);
+int lista_passageiro_vazia(ListaPassageiro *ListaPassageiro);
 
 
-/* Computa a quantidade de Passageiros na fila. Retorna a quantidade de Passageiros
- * ou -1, caso a fila for NULL. ok 
+/* Computa a quantidade de Passageiros na lista. Retorna a quantidade de Passageiros
+ * ou -1, caso a lista for NULL. ok 
  */
-int fila_passageiro_quantidade(ListaPassageiro *fila);
+int lista_passageiro_quantidade(ListaPassageiro *lista);
 
 //***************** Voo.h **************************
 // verifica se algum dos valores na struct voo é nulo. Se sim, retorna -1. Se não, retorna 1
@@ -139,52 +142,54 @@ int voo_igual(Voo *Voo1, Voo *Voo2);
 /* Retorna o tamanho em bytes do TAD aluno. Ok */
 int voo_tamanho();
 
-// ******************** FilaVoo.h **********************
+// ******************** listaVoo.h **********************
+
+struct no_voo* no_voo_cria(Voo* voo);
 
 /* Aloca espaço em memória e retorna uma ListaVoo ok */
-ListaVoo *fila_voo_cria();
+ListaVoo *lista_voo_cria();
 
 /* Libera a memória de uma ListaVoo previamente criada e atribui NULL ao ponteiro
  * ListaVoo. Retorna 1 caso seja possível fazer a liberação e 0 caso a ListaVoo
  * informada seja NULL. ok */
-int fila_voo_libera(ListaVoo **ListaVoo);
+int lista_voo_libera(ListaVoo **ListaVoo);
 
 /* Insere um Voo na ListaVoo. Retorna 1 se foi possível adicionar, 0 caso já
  * exista um Voo com a mesma codigo (nesse caso, o Voo não pode ser
  * adicionado) e -1 caso a ListaVoo ou Voo sejam NULL ok
  */
-int fila_voo_insere(ListaVoo *ListaVoo, Voo *voo);
+int lista_voo_insere(ListaVoo *ListaVoo, Voo *voo);
 
 /* Remove um Voo na ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja vazia ou
  * seja NULL ok */
-Voo *fila_voo_retira(ListaVoo *ListaVoo);
+Voo *lista_voo_retira(ListaVoo *ListaVoo, int codigo);
 
 /* Recupera o primeiro Voo da ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja
  * vazia ou seja NULL */
-Voo *fila_voo_primeiro(ListaVoo *ListaVoo);
+Voo *lista_voo_primeiro(ListaVoo *ListaVoo);
 
 /* Busca Voo pelo número de codigo. Retorna o Voo se este estiver na
  * lista e NULL caso contrário, isto é, (i) ListaVoo vazia; (ii) não exista Voo
  * com a codigo fornecida; ou (iii) a ListaVoo seja NULL ok */
-Voo *fila_voo_busca(ListaVoo *ListaVoo, int codigo);
+Voo *lista_voo_busca(ListaVoo *ListaVoo, int codigo);
 
 /* Verifica se a ListaVoo está vazia. Retorna 1 se a ListaVoo estiver vazia, 0 caso não
  * esteja vazia e -1 se a ListaVoo for NULL ok
  */
-int fila_voo_vazia(ListaVoo *ListaVoo);
+int lista_voo_vazia(ListaVoo *ListaVoo);
 
 
-/* Computa a quantidade de voos na fila. Retorna a quantidade de voos
- * ou -1, caso a fila for NULL. ok 
+/* Computa a quantidade de voos na lista. Retorna a quantidade de voos
+ * ou -1, caso a lista for NULL. ok 
  */
-int fila_voo_quantidade(ListaVoo *fila);
+int lista_voo_quantidade(ListaVoo *lista);
 
 
 
 //****************** Reserva.h *********************
 
 // verifica se algum dos valores na struct Reserva é nulo. Se sim, retorna -1. Se não, retorna 1
-int reserva_verifica(Reserva *reserva);
+int reserva_verifica(Reserva *reserva, int codigo,Data *data,Passageiro *passageiro,Voo *voo, Assento assento);
 
 /* Aloca e retorna um Reserva com os dados passados por parâmetro. Porém, para os
  * casos em que (i) pelo menos um dos parâmetros sejam nulos <-1, NULL, NULL>; e
@@ -233,7 +238,7 @@ int libera_no_agenda(Agenda* no);
 Agenda* insere_no_agenda (Agenda* raiz, Agenda* no);
 
 /* Retorna o conteúdo do no ou NULL caso o nó seja NULL. */
-Reserva* conteudo_agenda( Agenda* no);
+Reserva* conteudo_agenda(Agenda* no);
 
 /* Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em
  * caso contrário. */
@@ -268,3 +273,71 @@ Agenda *Sucessor(Agenda *agenda);
 
 Agenda *Minimo (Agenda *agenda);
 
+Viagem* lista_viagem_cria();
+
+Reserva* lista_viagem_busca(Viagem* viagem, int codigo);
+
+int lista_viagem_insere(Viagem* viagem, Reserva* reserva);
+
+int lista_viagem_vazia(Viagem* viagem);
+
+Trecho* lista_viagem_primeiro(Viagem* viagem);
+
+Trecho* lista_viagem_retira(Viagem* viagem);
+
+int lista_viagem_libera(Viagem** viagem);
+
+/* Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho.
+  (i) Se os campos passados como parametro forem NULL, a função retorna NULL;
+*/
+Trecho* novo_trecho(Reserva* reserva, Trecho* proximo_trecho);
+
+// Libera o espaço de memória atribuído a um trecho e atribui NULL ao Trecho.
+int trecho_libera(Trecho** trecho);
+
+//Atribui aos campos os valores de reserva e proximo trecho armazenados no trecho.
+int trecho_acessa(Trecho* trecho, Reserva* reserva, Trecho* proximo_trecho);
+
+/* Atribui ao trecho passado como parâmetro os novos valores de reserva e proximo trecho.
+   (i) Se os campos passados como parâmetro forem inválidos, as alterações não serão feitas.
+   (ii) Se o trecho passado como parâmetro for NULL, as alterações não serão feitas.
+*/
+int trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_trecho);
+
+/* Verifica se os trechos passados como parâmetros são iguais. Os trechos serão considerados iguais
+   se e somente se as reservas e os proximos trechos forem iguais.
+   (i) Se os trechos forem iguais, a função retorna 1.
+   (ii) Se os trechos forem diferentes, a função retorna 0.
+   (iii) Se um dos trechos for inválido ou NULL, a função retorna -1.
+*/
+int trecho_igual(Trecho* trecho1, Trecho* trecho2);
+
+Trecho* trecho_cria(Reserva* reserva);
+
+int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino);
+
+int eh_primo(int valor);
+
+TabelaViagem* cria_hash(int tamanho);
+
+void inicializar_hash(TabelaViagem* tabela);
+
+int codigo_hash(Viagem* viagem);
+
+int funcaoHash(TabelaViagem* tabela, int codigoHash);
+
+int inserir_hash(TabelaViagem* tabela, Viagem* viagem);
+
+Viagem* busca_hash(TabelaViagem* tabela, int indice);
+
+Viagem* retira_hash(TabelaViagem* tabela, int indice);
+
+int libera_hash(TabelaViagem** tabela);
+
+void imprimir_viagem(TabelaViagem* tabela, int indice);
+
+int tamanho_hash(TabelaViagem* tabela);
+
+Viagem* ponteiro_hash(TabelaViagem* tabela);
+
+int viagem_igual(Viagem* viagem1, Viagem* viagem2);

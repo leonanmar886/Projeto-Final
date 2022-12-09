@@ -48,3 +48,96 @@ gcc -c TravelBooking.c -o TravelBooking.o
 gcc -c TestaTravelBooking.c -o TestaTravelBooking.o 
 gcc -o TestaTravelBooking.bin  TestaTravelBooking.o TravelBooking.o
 ./TestaTravelBooking.bin
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+int lista_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
+  if(lista == NULL || passa == NULL){
+    return -1;
+  }
+  
+  if(lista->primeiro != NULL){
+    int id;
+    char nome[50];
+    char end[100];
+    passageiro_acessa(passa, &id, nome, end);
+    Passageiro *aux = lista_passageiro_busca(lista, id);
+    if(aux != NULL){
+      return 0;
+    }
+    No_Passageiro* ultimo = lista->primeiro;
+    while(ultimo->proximo != NULL){
+      ultimo = ultimo->proximo;
+    }
+    No_Passageiro* novo = no_passageiro_cria(passa);
+    ultimo->proximo = novo;
+    return 1;
+    
+  }
+  else if (lista->primeiro == NULL){
+    No_Passageiro* novo = no_passageiro_cria(passa);
+    lista->primeiro = novo;
+    return 1;
+  }
+  
+}
+
+int lista_voo_insere(ListaVoo *lista, Voo *voo){
+  if(lista == NULL || voo == NULL){
+    return -1;
+  }
+
+  if(lista->primeiro != NULL){
+    int codigo;
+    char origem[100];
+    char destino[100];
+    voo_acessa(voo, &codigo, origem, destino);
+    Voo *aux = lista_voo_busca(lista, codigo);
+    if(aux != NULL){
+      return 0;
+    }
+    No_Voo* ultimo = lista->primeiro;
+    while (ultimo->proximo != NULL){
+      ultimo = ultimo->proximo;
+    }
+    No_Voo* novo = no_voo_cria(voo);
+    ultimo->proximo = novo;
+    return 1;    
+  }
+  else if (lista->primeiro == NULL){
+    No_Voo* novo = no_voo_cria(voo);
+    lista->primeiro = novo;
+    return 1;
+  }
+}
+
+int lista_voo_insere(ListaVoo *lista, Voo *voo){
+  if(lista == NULL || voo == NULL){
+    return -1;
+  }
+
+  if(lista->primeiro != NULL){
+    int codigo;
+    char origem[100];
+    char destino[100];
+    voo_acessa(voo, &codigo, origem, destino);
+    Voo *aux = lista_voo_busca(lista, codigo);
+    if(aux != NULL){
+      return 0;
+    }
+    No_Voo* ultimo = lista->primeiro;
+    while (ultimo->proximo != NULL){
+      ultimo = ultimo->proximo;
+    }
+    No_Voo* novo = no_voo_cria(voo);
+    ultimo->proximo = novo;
+    return 1;    
+  }
+  else if (lista->primeiro == NULL){
+    No_Voo* novo = no_voo_cria(voo);
+    lista->primeiro = novo;
+    return 1;
+  }
+}

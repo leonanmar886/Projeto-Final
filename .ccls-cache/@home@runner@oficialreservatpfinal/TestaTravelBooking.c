@@ -138,173 +138,173 @@ float teste_passageiro_atribui_dados_invalidos() {
 
 
 
-int teste_fila_passageiro_cria() {
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
-    printf("[Passou] - fila_passageiro_cria()\n");
+int teste_lista_passageiro_cria() {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL) {
+    printf("[Passou] - lista_passageiro_cria()\n");
     return 1;
   } else {
-    printf("[Falhou] - fila_passageiro_cria()\n");
+    printf("[Falhou] - lista_passageiro_cria()\n");
     return 0;
   }
 }
 
-int teste_fila_passageiro_libera() {
+int teste_lista_passageiro_libera() {
   float pontuacao = 0;
-  ListaPassageiro *fila = fila_passageiro_cria();
-  fila_passageiro_libera(&fila);
-  if (fila != NULL || fila_passageiro_libera(NULL) != 0) {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  lista_passageiro_libera(&lista);
+  if (lista != NULL || lista_passageiro_libera(NULL) != 0) {
     printf(
-        "[Falhou] - fila_passageiro_libera()\n");
+        "[Falhou] - lista_passageiro_libera()\n");
     return 0;
   } else {
     printf(
-        "[Passou] - fila_passageiro_libera()\n");
+        "[Passou] - lista_passageiro_libera()\n");
     return 1;
   }
 }
 
 
 
-int teste_fila_passageiro_insere() {
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
+int teste_lista_passageiro_insere() {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL) {
     Passageiro *abraao = passageiro_novo(1, "Abraão", "Rua Ipanema, 221");
     Passageiro *jorge = passageiro_novo(1, "Jorge", "Rua Ipanema, 224");
-    if (fila_passageiro_insere(fila, abraao) == 1 && fila_passageiro_insere(fila, jorge) == 0 && fila_passageiro_insere(fila, NULL) == -1) {
+    if (lista_passageiro_insere(lista, abraao) == 1 && lista_passageiro_insere(lista, jorge) == 0 && lista_passageiro_insere(lista, NULL) == -1) {
       Passageiro *jaco = passageiro_novo(2, "Jaco", "Rua Ipanema, 222");
-      if (fila_passageiro_insere(fila, jaco) == 1) {
+      if (lista_passageiro_insere(lista, jaco) == 1) {
         Passageiro *jose = passageiro_novo(3, "Jose", "Rua Ipanema, 223");
-        if (fila_passageiro_insere(fila, jose) == 1) {
-          printf("[Passou] - fila_passageiro_insere()\n");
+        if (lista_passageiro_insere(lista, jose) == 1) {
+          printf("[Passou] - lista_passageiro_insere()\n");
           return 1;
         } else {
-          printf("[Falhou] - fila_passageiro_insere()\n");
+          printf("[Falhou] - lista_passageiro_insere()\n");
         }
       } else {
-        printf("[Falhou] - fila_passageiro_insere()\n");
+        printf("[Falhou] - lista_passageiro_insere()\n");
       }
     } else {
-      printf("[Falhou] - fila_passageiro_insere()\n");
+      printf("[Falhou] - lista_passageiro_insere()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_passageiro_insere()\n");
+        "[Falhou] - lista_passageiro_insere()\n");
   }
   return 0;
 }
 
-int teste_fila_passageiro_retira() {
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
+int teste_lista_passageiro_retira() {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL) {
     Passageiro *abraao = passageiro_novo(1, "Abraão", "Rua Ipanema, 222");
-    fila_passageiro_insere(fila, abraao);
+    lista_passageiro_insere(lista, abraao);
     Passageiro *jaco = passageiro_novo(2, "Jaco", "Rua Ipanema, 223");
-    fila_passageiro_insere(fila, jaco);
+    lista_passageiro_insere(lista, jaco);
     Passageiro *jose = passageiro_novo(3, "Jose", "Rua Ipanema, 224");
-    fila_passageiro_insere(fila, jose);
-    Passageiro *passageiro = fila_passageiro_retira(fila);
+    lista_passageiro_insere(lista, jose);
+    Passageiro *passageiro = lista_passageiro_retira(lista, 1);
 
     if (passageiro_igual(passageiro, abraao) == 1) {
-      passageiro = fila_passageiro_retira(fila);
+      passageiro = lista_passageiro_retira(lista, 2);
       if (passageiro_igual(passageiro, jaco) == 1) {
-        passageiro = fila_passageiro_retira(fila);
-        if (passageiro_igual(passageiro, jose) == 1 && fila_passageiro_retira(NULL) == NULL) {
-          printf("[Passou] - fila_passageiro_retira()\n");
+        passageiro = lista_passageiro_retira(lista, 3);
+        if (passageiro_igual(passageiro, jose) == 1 && lista_passageiro_retira(lista, 1) == NULL && lista_passageiro_retira(NULL, 1) == NULL) {
+          printf("[Passou] - lista_passageiro_retira()\n");
           return 1;
         } else {
-          printf("[Falhou] - fila_passageiro_retira()\n");
+          printf("[Falhou] - lista_passageiro_retira()\n");
         }
       } else {
-        printf("[Falhou] - fila_passageiro_retira()\n");
+        printf("[Falhou] - lista_passageiro_retira()\n");
       }
     } else {
       printf(
-          "[Falhou] - fila_passageiro_retira()\n");
+          "[Falhou] - lista_passageiro_retira()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_passageiro_retira()\n");
+        "[Falhou] - lista_passageiro_retira()\n");
   }
   return 0;
 }
 // Trecho repetido
 
-int teste_fila_passageiro_busca() {
+int teste_lista_passageiro_busca() {
   int id;
   char nome[50];
   char endereco[100];
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL) {
     Passageiro *abraao = passageiro_novo(1, "Abraão", "Rua Ipanema, 221");
-    fila_passageiro_insere(fila, abraao);
+    lista_passageiro_insere(lista, abraao);
     Passageiro *jaco = passageiro_novo(2, "Jaco", "Rua Ipanema, 222");
-    fila_passageiro_insere(fila, jaco);
+    lista_passageiro_insere(lista, jaco);
     Passageiro *jose = passageiro_novo(3, "Jose", "Rua Ipanema, 223");
-    fila_passageiro_insere(fila, jose);
-    Passageiro *aux = fila_passageiro_busca(fila, 2);
-    Passageiro *aux1 = fila_passageiro_busca(fila, 5);
-    Passageiro *aux2 = fila_passageiro_busca(NULL, 1);
+    lista_passageiro_insere(lista, jose);
+    Passageiro *aux = lista_passageiro_busca(lista, 2);
+    Passageiro *aux1 = lista_passageiro_busca(lista, 5);
+    Passageiro *aux2 = lista_passageiro_busca(NULL, 1);
     if (aux != NULL && aux1 == NULL && aux2 == NULL) {
       passageiro_acessa(aux, &id, nome, endereco);
       if (id == 2 && strcmp(nome, "Jaco") == 0 &&
           strcmp(endereco, "Rua Ipanema, 222") == 0) {
-        printf("[Passou] - fila_passageiro_busca()\n");
+        printf("[Passou] - lista_passageiro_busca()\n");
         return 1;
       } else {
-        printf("[Falhou] - fila_passageiro_busca()\n");
+        printf("[Falhou] - lista_passageiro_busca()\n");
       }
     } else {
-      printf("[Falhou] - fila_passageiro_busca()\n");
+      printf("[Falhou] - lista_passageiro_busca()\n");
     }
   } else {
-    printf("[Falhou] - fila_passageiro_busca()\n");
+    printf("[Falhou] - lista_passageiro_busca()\n");
   }
   return 0;
 }
 
-float teste_fila_passageiro_vazia() {
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL && fila_passageiro_vazia(fila) == 1) {
-    printf("[Passou] - fila_passageiro_vazia() \n");
+float teste_lista_passageiro_vazia() {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL && lista_passageiro_vazia(lista) == 1) {
+    printf("[Passou] - lista_passageiro_vazia() \n");
     return 1;
 } 
   Passageiro* passageiro_aux = passageiro_novo(1,"José", "Rua Humerto Monte 22");
-  fila_passageiro_insere(fila, passageiro_aux);
+  lista_passageiro_insere(lista, passageiro_aux);
 
-  if (fila_passageiro_vazia(fila) != 0){
-    printf("[Falhou] - fila_passageiro_vazia() \n");
+  if (lista_passageiro_vazia(lista) != 0){
+    printf("[Falhou] - lista_passageiro_vazia() \n");
     return 0;
   }
 
   
   else {
-    printf("[Falhou] - fila_passageiro_vazia() \n");
+    printf("[Falhou] - lista_passageiro_vazia() \n");
     return 0;
   }
 }
 
-float teste_fila_passageiro_primeiro() {
-  ListaPassageiro *fila = fila_passageiro_cria();
-  if (fila != NULL) {
+float teste_lista_passageiro_primeiro() {
+  ListaPassageiro *lista = lista_passageiro_cria();
+  if (lista != NULL) {
     Passageiro *passageiro_1 = passageiro_novo(1, "Recife", "Fortaleza");
-    fila_passageiro_insere(fila, passageiro_1);
+    lista_passageiro_insere(lista, passageiro_1);
     Passageiro *passageiro_2 = passageiro_novo(2, "Palmas", "Paris");
-    fila_passageiro_insere(fila, passageiro_2);
+    lista_passageiro_insere(lista, passageiro_2);
     Passageiro *passageiro_3 = passageiro_novo(3, "Miami", "Manaus");
-    fila_passageiro_insere(fila, passageiro_3);
-    Passageiro *passageiro_primeiro = fila_passageiro_primeiro(fila);
+    lista_passageiro_insere(lista, passageiro_3);
+    Passageiro *passageiro_primeiro = lista_passageiro_primeiro(lista);
 
     if (passageiro_igual(passageiro_primeiro, passageiro_1) == 1) {
-      printf("[Passou] - fila_passageiro_primeiro()\n");
+      printf("[Passou] - lista_passageiro_primeiro()\n");
       return 1;
 
     } else {
-      printf("[Falhou] - fila_passageiro_primeiro()\n");
+      printf("[Falhou] - lista_passageiro_primeiro()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_passageiro_primeiro()\n");
+        "[Falhou] - lista_passageiro_primeiro()\n");
   }
   return 0;
 }
@@ -441,164 +441,166 @@ int teste_voo_igual(){
   printf("[Falhou] - voo_igual()");
   return 0;
 }
-int teste_fila_voo_cria() {
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL) {
-    printf("[Passou] - fila_voo_cria()\n");
+int teste_lista_voo_cria() {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL) {
+    printf("[Passou] - lista_voo_cria()\n");
     return 1;
   } else {
-    printf("[Falhou] - fila_voo_cria()\n");
+    printf("[Falhou] - lista_voo_cria()\n");
     return 0;
   }
 }
-float teste_fila_voo_libera() {
-  ListaVoo *fila = fila_voo_cria();
-  fila_voo_libera(&fila);
-  if (fila != NULL || fila_voo_libera(NULL) != 0) {
+float teste_lista_voo_libera() {
+  ListaVoo *lista = lista_voo_cria();
+  lista_voo_libera(&lista);
+  if (lista != NULL || lista_voo_libera(NULL) != 0) {
     printf(
-        "[Falhou] - fila_voo_libera()\n");
+        "[Falhou] - lista_voo_libera()\n");
     return 0;
   } else {
     printf(
-        "[Passou] - fila_voo_libera()\n");
+        "[Passou] - lista_voo_libera()\n");
     return 1;
   }
 }
-float teste_fila_voo_vazia() {
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL && fila_voo_vazia(fila) == 1) {
-    printf("[Passou] - fila_voo_vazia() \n");
+float teste_lista_voo_vazia() {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL && lista_voo_vazia(lista) == 1) {
+    printf("[Passou] - lista_voo_vazia() \n");
     return 1;
 } 
   Voo* voo_aux = voo_novo(1,"Maceio", "Campinas");
-  fila_voo_insere(fila, voo_aux);
-  if (fila_voo_vazia(fila) != 0){
-    printf("[Falhou] - fila_voo_vazia() \n");
+  lista_voo_insere(lista, voo_aux);
+  if (lista_voo_vazia(lista) != 0){
+    printf("[Falhou] - lista_voo_vazia() \n");
     return 0;
   }
   
   else {
-    printf("[Falhou] - fila_voo_vazia() \n");
+    printf("[Falhou] - lista_voo_vazia() \n");
     return 0;
   }
 }
-float teste_fila_voo_insere() {
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL) {
+float teste_lista_voo_insere() {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL) {
     Voo *voo_manaus = voo_novo(1, "Manaus", "Fortaleza");
     Voo *voo_coritiba = voo_novo(1, "Coritiba", "Fortaleza");
-    if (fila_voo_insere(fila, voo_manaus) == 1 && fila_voo_insere(fila, voo_coritiba) == 0 && fila_voo_insere(fila, NULL) == -1) {
+    if (lista_voo_insere(lista, voo_manaus) == 1 && lista_voo_insere(lista, voo_coritiba) == 0 && lista_voo_insere(lista, NULL) == -1) {
       Voo *voo_palmas = voo_novo(2, "Palmas", "Fortaleza");
       Voo *voo_recife = voo_novo(2, "Recife", "Fortaleza");
-      if (fila_voo_insere(fila, voo_palmas) == 1 && fila_voo_insere(fila, voo_recife) == 0) {
+      if (lista_voo_insere(lista, voo_palmas) == 1 && lista_voo_insere(lista, voo_recife) == 0) {
         Voo *voo_orlando = voo_novo(3, "Orlando", "Fortaleza");
-        if (fila_voo_insere(fila, voo_orlando) == 1) {
-          printf("[Passou] - fila_voo_insere\n");
+        if (lista_voo_insere(lista, voo_orlando) == 1) {
+          printf("[Passou] - lista_voo_insere\n");
           return 1;
         } else {
-          printf("[Falhou] - fila_voo_insere()\n");
+          printf("[Falhou] - lista_voo_insere()\n");
         }
       } else {
-        printf("[Falhou] - fila_voo_insere()\n");
+        printf("[Falhou] - lista_voo_insere()\n");
       }
     } else {
-      printf("[Falhou] - fila_voo_insere()\n");
+      printf("[Falhou] - lista_voo_insere()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_voo_insere()\n");
+        "[Falhou] - lista_voo_insere()\n");
   }
   return 0;
 }
-float teste_fila_voo_primeiro() {
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL) {
+float teste_lista_voo_primeiro() {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL) {
     Voo *voo_fortaleza = voo_novo(1, "Recife", "Fortaleza");
-    fila_voo_insere(fila, voo_fortaleza);
+    lista_voo_insere(lista, voo_fortaleza);
     Voo* voo_paris = voo_novo(2, "Palmas", "Paris");
-    fila_voo_insere(fila, voo_paris);
+    lista_voo_insere(lista, voo_paris);
     Voo *voo_manaus = voo_novo(3, "Miami", "Manaus");
-    fila_voo_insere(fila, voo_manaus);
-    Voo *voo_primeiro = fila_voo_primeiro(fila);
+    lista_voo_insere(lista, voo_manaus);
+    Voo *voo_primeiro = lista_voo_primeiro(lista);
     if (voo_igual(voo_primeiro, voo_fortaleza) == 1) {
-      printf("[Passou] - fila_voo_primeiro()\n");
+      printf("[Passou] - lista_voo_primeiro()\n");
       return 1;
     } else {
-      printf("[Falhou] - fila_voo_primeiro()\n");
+      printf("[Falhou] - lista_voo_primeiro()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_voo_primeiro()\n");
+        "[Falhou] - lista_voo_primeiro()\n");
   }
   return 0;
 }
-float teste_fila_voo_busca() {
+float teste_lista_voo_busca() {
   int codigo;
   char origem[100];
   char destino[100];
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL) {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL) {
     Voo *voo_fortaleza = voo_novo(1, "Recife", "Fortaleza");
-    fila_voo_insere(fila, voo_fortaleza);
+    lista_voo_insere(lista, voo_fortaleza);
     Voo* voo_paris = voo_novo(2, "Palmas", "Paris");
-    fila_voo_insere(fila, voo_paris);
+    lista_voo_insere(lista, voo_paris);
     Voo *voo_manaus = voo_novo(3, "Maceio", "Porto Alegre");
-    fila_voo_insere(fila, voo_manaus);
-    Voo *aux = fila_voo_busca(fila, 2);
+    lista_voo_insere(lista, voo_manaus);
+    Voo *aux = lista_voo_busca(lista, 2);
     if (aux != NULL) {
       voo_acessa(aux, &codigo, origem, destino);
       if (codigo == 2 && strcmp(origem, "Palmas") == 0 &&
           strcmp(destino, "Paris") == 0) {
-        printf("[Passou] - fila_voo_busca()\n");
+        printf("[Passou] - lista_voo_busca()\n");
                return 1;
       } else {
-        printf("[Falhou] - fila_voo_busca()\n");
+        printf("[Falhou] - lista_voo_busca()\n");
       }
     } else {
-      printf("[Falhou] - fila_voo_busca()\n");
+      printf("[Falhou] - lista_voo_busca()\n");
     }
   } else {
-    printf("[Falhou] - fila_voo_busca()\n");
+    printf("[Falhou] - lista_voo_busca()\n");
   }
   return 0;
 }
-float teste_fila_voo_retira() {
-  ListaVoo *fila = fila_voo_cria();
-  if (fila != NULL) {
+float teste_lista_voo_retira() {
+  ListaVoo *lista = lista_voo_cria();
+  if (lista != NULL) {
     Voo *voo_fortaleza = voo_novo(1, "Recife", "Fortaleza");
-    fila_voo_insere(fila, voo_fortaleza);
+    lista_voo_insere(lista, voo_fortaleza);
     Voo* voo_paris = voo_novo(2, "Palmas", "Paris");
-    fila_voo_insere(fila, voo_paris);
+    lista_voo_insere(lista, voo_paris);
     Voo *voo_manaus = voo_novo(3, "Maceio", "Porto Alegre");
-    fila_voo_insere(fila, voo_manaus);
-    Voo *aux = fila_voo_retira(fila);
+    lista_voo_insere(lista, voo_manaus);
+    Voo *aux = lista_voo_retira(lista, 1);
     if (voo_igual(aux, voo_fortaleza) == 1) {
-      aux = fila_voo_retira(fila);
+      aux = lista_voo_retira(lista, 2);
       if (voo_igual(aux, voo_paris) == 1) {
-        aux = fila_voo_retira(fila);
+        aux = lista_voo_retira(lista, 3);
         if (voo_igual(aux, voo_manaus) == 1) {
-          aux = fila_voo_retira(fila);
-          if(aux == NULL){
-          printf("[Passou] - fila_voo_retira() \n");
-          return 1;}
+            aux = lista_voo_retira(lista, 1);
+            Voo* aux2 = lista_voo_retira(NULL,1);
+          if(aux == NULL && aux2 == NULL){
+          printf("[Passou] - lista_voo_retira() \n");
+          return 1;
+          }
           else{
-            printf("[Falhou] - fila_voo_retira()\n");
+            printf("[Falhou] - lista_voo_retira()\n");
             return 0;
           }
         }
          else {
-          printf("[Falhou] - fila_voo_retira()\n");
+          printf("[Falhou] - lista_voo_retira()\n");
         }
       } else {
-        printf("[Falhou] - fila_voo_retira()\n");
+        printf("[Falhou] - lista_voo_retira()\n");
       }
     } else {
       printf(
-          "[Falhou] - fila_voo_retira()\n");
+          "[Falhou] - lista_voo_retira()\n");
     }
   } else {
     printf(
-        "[Falhou] - fila_voo_retira()\n");
+        "[Falhou] - lista_voo_retira()\n");
   }
   return 0;
 }
@@ -813,12 +815,14 @@ void teste_insere_no_agenda() {
   Data* data2 = data_nova(12,12,2021);
   Assento assento2 = B7;
   Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+  
   Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
-
+  Passageiro *passageiro3 = passageiro_novo(5, "Jonas Esticado", "Rua Nunes Valente, 1540");
   Reserva* reserva2 = reserva_nova(2, data2, passageiro2, voo2, assento2);
+  Reserva* reserva3 = reserva_nova(45, data2, passageiro3, voo2, assento2);
 
   Agenda* no = criar_no_agenda(data2, reserva2);
-
+  Agenda* no_2 = criar_no_agenda(data2, reserva3);
   raiz = insere_no_agenda(raiz, no);
 
   int codigo = data_inteiro(data2);
@@ -829,8 +833,9 @@ void teste_insere_no_agenda() {
 
   if(chave_agenda(abb_busca_agenda_data_passageiro(raiz, id2,data2)) == chave_agenda(no) 
     && insere_no_agenda(NULL, NULL) == NULL){
+      if (insere_no_agenda(raiz, no_2) == NULL){
       printf("[Passou] - insere_no_agenda()\n");
-    
+      }
   } else {
       printf("[Falhou] - insere_no_agenda()\n");
   }
@@ -1183,6 +1188,355 @@ void teste_minimo(){
   }
 }
 
+///////////////// TESTES VIAGEM ///////////////////////////////////////////////////////
+
+int teste_viagem_cria() {
+    printf("************************************************ TESTE VIAGEM ************************************************ \n");
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL) {
+        printf("[Passou] - viagem_cria()\n");
+        return 1;
+    } else {
+        printf("[Falhou] - viagem_cria()\n");
+        return 0;
+    }
+}
+float teste_viagem_libera() {
+    Viagem *viagem = lista_viagem_cria();
+    lista_viagem_libera(&viagem);
+    if (viagem != NULL || lista_viagem_libera(NULL) != 0) {
+        printf(
+            "[Falhou] - viagem_libera()\n");
+        return 0;
+    } else {
+        printf(
+            "[Passou] - viagem_libera()\n");
+        return 1;
+    }
+}
+
+float teste_viagem_vazia() {
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL && lista_viagem_vazia(viagem) == 1) {
+        printf("[Passou] - viagem_vazia() \n");
+        return 1;
+    } else {
+        printf("[Falhou] - lista_voo_vazia() \n");
+        return 0;
+    }
+}
+
+float teste_viagem_insere() {
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL){
+    Data *data1 = data_nova(16, 4, 2023);
+    Data *data2 = data_nova(12, 12, 2021);
+    Data *data3 = data_nova(12, 12, 2024);
+    Assento assento1 = A0;
+    Assento assento2 = B7;
+    Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+    Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+    Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+    Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
+    Voo *voo3 = voo_novo(12, "Londres", "Buenos Aires");
+
+    Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+    Reserva *reserva2 = reserva_nova(1, data2, passageiro2, voo2, assento2);
+    Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento2);
+
+    if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 0 && lista_viagem_insere(viagem, NULL) == -1 && lista_viagem_insere(viagem, reserva3) == 1) {
+        printf("[Passou] - viagem_insere()\n");
+        return 1;
+    } else {
+        printf("[Falhou] - viagem_insere()\n");
+    }
+    }
+    printf("[Falhou] - viagem_insere()\n");
+    return 0;
+}
+
+float teste_viagem_primeiro() {
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL) {
+        Data *data1 = data_nova(16, 4, 2023);
+        Data *data2 = data_nova(12, 12, 2021);
+        Data *data3 = data_nova(07, 12, 2021);
+        Assento assento1 = A0;
+        Assento assento2 = B7;
+        Assento assento3 = C7;
+        Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+        Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+        Passageiro *passageiro3 = passageiro_novo(3, "Yara Vasconcelos", "Av. Beira Mar, 1998");
+        Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+        Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
+        Voo *voo3 = voo_novo(92, "Dacar", "Gaborone");
+
+        Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+        Reserva *reserva2 = reserva_nova(2, data2, passageiro2, voo2, assento2);
+        Reserva *reserva3 = reserva_nova(3, data3, passageiro3, voo3, assento3);
+
+        lista_viagem_insere(viagem, reserva1);
+        lista_viagem_insere(viagem, reserva2);
+        lista_viagem_insere(viagem, reserva3);
+
+        Trecho *primeiro_trecho = lista_viagem_primeiro(viagem);
+
+        Trecho *trecho1 = trecho_cria(lista_viagem_busca(viagem, 1));
+        if (trecho_igual(primeiro_trecho, trecho1) == 1) {
+            printf("[Passou] - viagem_primeiro()\n");
+            return 1;
+        } else {
+            printf("[Falhou] - viagem_primeiro()\n");
+        }
+    } else {
+        printf(
+            "[Falhou] - viagem_primeiro()\n");
+    }
+    return 0;
+}
+
+float teste_viagem_busca() {
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL) {
+        Data *data1 = data_nova(16, 4, 2023);
+        Data *data2 = data_nova(12, 12, 2023);
+        Data *data3 = data_nova(7, 12, 2024);
+        Assento assento1 = A0;
+        Assento assento2 = B7;
+        Assento assento3 = C7;
+        Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+        Passageiro *passageiro2 = passageiro_novo(2, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+        Passageiro *passageiro3 = passageiro_novo(3, "Yara Vasconcelos", "Av. Beira Mar, 1998");
+        Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+        Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+        Voo *voo3 = voo_novo(92, "Buenos Aires", "Gaborone");
+
+        Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+        Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento2);
+        Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento3);
+
+        lista_viagem_insere(viagem, reserva1);
+        lista_viagem_insere(viagem, reserva2);
+        lista_viagem_insere(viagem, reserva3);
+
+        Reserva *aux = lista_viagem_busca(viagem, 2);
+        if (aux != NULL) {
+            if (reserva_igual(aux, reserva2) == 1 && lista_viagem_busca(NULL, -1) == NULL) {
+                printf("[Passou] - viagem_busca()\n");
+                return 1;
+            } else {
+                printf("[Falhou] - viagem_busca()\n");
+            }
+        } else {
+            printf("[Falhou] - viagem_busca()\n");
+        }
+    } else {
+        printf("[Falhou] - viagem_busca()\n");
+    }
+    return 0;
+}
+
+float teste_viagem_retira() {
+    Viagem *viagem = lista_viagem_cria();
+    if (viagem != NULL) {
+        Data *data1 = data_nova(16, 4, 2023);
+        Data *data2 = data_nova(12, 12, 2023);
+        Data *data3 = data_nova(7, 12, 2024);
+        Assento assento1 = A0;
+        Assento assento2 = B7;
+        Assento assento3 = C7;
+        Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+        Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+        Passageiro *passageiro3 = passageiro_novo(3, "Yara Vasconcelos", "Av. Beira Mar, 1998");
+        Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+        Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+        Voo *voo3 = voo_novo(92, "Buenos Aires", "Gaborone");
+
+        Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+        Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento2);
+        Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento3);
+
+        lista_viagem_insere(viagem, reserva1);
+        lista_viagem_insere(viagem, reserva2);
+        lista_viagem_insere(viagem, reserva3);
+
+        Trecho *aux = lista_viagem_retira(viagem);
+        Trecho *trecho_retirado = trecho_cria(reserva1);
+        if (trecho_igual(aux, trecho_retirado) == 1) {
+            aux = lista_viagem_retira(viagem);
+            trecho_retirado = trecho_cria(reserva2);
+            if (trecho_igual(aux, trecho_retirado) == 1) {
+                aux = lista_viagem_retira(viagem);
+                trecho_retirado = trecho_cria(reserva3);
+                if (trecho_igual(aux, trecho_retirado) == 1) {
+                    aux = lista_viagem_retira(viagem);
+                    if(aux == NULL){
+                        printf("[Passou] - viagem_retira() \n");
+                        return 1;
+                    } else{
+                        printf("[Falhou] - viagem_retira()\n");
+                        return 0;
+                    }
+                } else {
+                    printf("[Falhou] - viagem_retira()\n");
+                }
+            } else {
+                printf("[Falhou] - viagem_retira()\n");
+            }
+        } else {
+            printf("[Falhou] - viagem_retira()\n");
+        }
+    } else {
+        printf("[Falhou] - viagem_retira()\n");
+    }
+    return 0;
+}
+
+int teste_cria_hash(){
+    printf("************************************************ TESTE HASH ************************************************");
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL && tamanho_hash(novo_hash) != 0 && ponteiro_hash(novo_hash) != NULL){
+        printf("\n[Passou] - cria_hash()");
+    }
+    else{
+    printf("\n[Falhou] - cria_hash()");
+    }
+    return 1;
+}
+
+int teste_inicializar_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        if (ponteiro_hash(novo_hash) == NULL){
+            printf("\n[Passou] - inicializar_hash()");
+            return 1;
+    }
+    }
+    printf("\n[Falhou] - inicializar_hash()");
+}
+
+int teste_inserir_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 
+              && lista_viagem_insere(viagem, reserva3) == 1){
+              
+               int id = funcaoHash(novo_hash,codigo_hash(viagem));
+              
+              if (inserir_hash(novo_hash, viagem) == 1){
+                    printf("\n[Passou] - inserir_hash()");
+                    return 1;
+                }
+               else{
+                    printf("\n[Falhou] - inserir_hash()");
+                }
+            }
+            else{
+            printf("\n[Falhou] - inserir_hash()");
+            }
+            }
+            else{
+                printf("\n[Falhou] - inserir_hash()");
+            }
+
+}else{
+printf("\n[Falhou] - inserir_hash()");
+      }
+}
+
+int teste_buscar_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 && lista_viagem_insere(viagem, reserva3) == 1){
+              int id = funcaoHash(novo_hash, codigo_hash(viagem));
+              if (inserir_hash(novo_hash, viagem) == 1){
+                
+                Viagem* aux = busca_hash(novo_hash, id);
+                if (viagem == aux){
+                  printf("\n[Passou] - busca_hash()");
+                  return 1;
+                }
+              }
+            }
+        }
+    }
+    printf("\n[Falhou] - busca_hash()");
+    return 0;
+}
+
+int teste_retira_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 && lista_viagem_insere(viagem, reserva3) == 1){
+              if (inserir_hash(novo_hash, viagem) == 1){
+                int id = funcaoHash(novo_hash, codigo_hash(viagem));
+                Viagem* aux_1 = retira_hash(novo_hash, id);
+                Viagem* aux_2 = busca_hash(novo_hash, id);
+                if (viagem == aux_1 && aux_2 == NULL){
+                  printf("\n[Passou] - retira_hash()\n");
+                  return 1;
+                }
+              }
+            }
+        }
+    }
+    printf("\n[Falhou] - retira_hash()");
+    return 0;
+}
 
 int main(void) {
   
@@ -1194,13 +1548,13 @@ int main(void) {
   teste_passageiro_atribui_dados_validos();
   teste_passageiro_atribui_dados_invalidos();
   teste_passageiro_igual();
-  teste_fila_passageiro_cria();
-  teste_fila_passageiro_libera();
-  teste_fila_passageiro_vazia();
-  teste_fila_passageiro_insere();
-  teste_fila_passageiro_primeiro();
-  teste_fila_passageiro_busca();
-  teste_fila_passageiro_retira();
+  teste_lista_passageiro_cria();
+  teste_lista_passageiro_libera();
+  teste_lista_passageiro_vazia();
+  teste_lista_passageiro_insere();
+  teste_lista_passageiro_primeiro();
+  teste_lista_passageiro_busca();
+  teste_lista_passageiro_retira();
   // Testes Voo
 
   teste_voo_novo();
@@ -1209,13 +1563,13 @@ int main(void) {
   teste_voo_atribui_dados_validos();
   teste_voo_atribui_dados_invalidos();
   teste_voo_igual();
-  teste_fila_voo_cria();
-  teste_fila_voo_libera();
-  teste_fila_voo_vazia();
-  teste_fila_voo_insere();
-  teste_fila_voo_primeiro();
-  teste_fila_voo_busca();
-  teste_fila_voo_retira();
+  teste_lista_voo_cria();
+  teste_lista_voo_libera();
+  teste_lista_voo_vazia();
+  teste_lista_voo_insere();
+  teste_lista_voo_primeiro();
+  teste_lista_voo_busca();
+  teste_lista_voo_retira();
 
   //Testes Reserva
   teste_reserva_nova();
@@ -1227,22 +1581,59 @@ int main(void) {
   teste_reserva_igual();
 
   //Testes Agenda
-   teste_chave_agenda();
+  teste_chave_agenda();
   teste_conteudo_agenda();
   teste_libera_no_agenda();
   teste_minimo();
   teste_numero();
   teste_busca_agenda_data_passageiro();
   teste_insere_no_agenda();
- teste_busca_agenda_codigo();
+  teste_busca_agenda_codigo();
   teste_busca_agenda_passageiro_voo(); 
   teste_sucessor();
   teste_altura();
   teste_remove_no_agenda();
   
-  
-  
+  //Testes Viagem
+  teste_viagem_cria();
+  teste_viagem_libera();
+  teste_viagem_vazia();
+  teste_viagem_insere();
+  teste_viagem_primeiro();
+  teste_viagem_busca();
+  teste_viagem_retira();
+
+  //Testes Hash
+  teste_cria_hash();
+  teste_inicializar_hash();
+  teste_inserir_hash();
+  teste_buscar_hash();
+  teste_retira_hash();
+
+   int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+        inicializar_hash(novo_hash);        
+        Viagem *viagem = lista_viagem_cria();
+        
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 5, 2023);
+            Data *data3 = data_nova(8, 7, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+             
+            
+           lista_viagem_insere(viagem, reserva1);
+           lista_viagem_insere(viagem, reserva2) ;
+           lista_viagem_insere(viagem, reserva3) ;
+  int id = funcaoHash(novo_hash, codigo_hash(viagem));
+  inserir_hash(novo_hash, viagem); 
+  imprimir_viagem(novo_hash, id);
   return 0;
 }
-
-
