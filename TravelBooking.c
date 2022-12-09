@@ -254,8 +254,7 @@ int lista_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
   if(lista == NULL || passa == NULL){
     return -1;
   }
-  
-  if(lista->primeiro != NULL){
+  if(lista->primeiro!= NULL){
     int id;
     char nome[50];
     char end[100];
@@ -264,20 +263,26 @@ int lista_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
     if(aux != NULL){
       return 0;
     }
-    No_Passageiro* ultimo = lista->primeiro;
-    while(ultimo->proximo != NULL){
-      ultimo = ultimo->proximo;
-    }
-    No_Passageiro* novo = no_passageiro_cria(passa);
-    ultimo->proximo = novo;
-    return 1;
     
   }
-  else if (lista->primeiro == NULL){
-    No_Passageiro* novo = no_passageiro_cria(passa);
+  if (lista->primeiro == NULL){
+    No_Passageiro* novo =(No_Passageiro*) malloc(sizeof(No_Passageiro));
+    novo->passageiro = passa;
+    novo->proximo = NULL;
     lista->primeiro = novo;
-    return 1;
   }
+  else {
+    No_Passageiro* ultimo = lista->primeiro;
+    while( ultimo->proximo != NULL){
+      ultimo = ultimo->proximo;
+    }
+  No_Passageiro* novo = (No_Passageiro *)malloc(sizeof(No_Passageiro));
+  novo->passageiro = passa;
+  novo->proximo = NULL;
+  ultimo->proximo = novo;  
+    
+  }
+  return 1;
   
 }
 //
@@ -302,9 +307,9 @@ Passageiro* lista_passageiro_retira(ListaPassageiro* lista, int id){
   if (lista -> primeiro == no_passageiro){
     lista -> primeiro = no_passageiro -> proximo;
   }
-  ultimo -> proximo = no_passageiro -> proximo;
   Passageiro* passageiro_retirado = no_passageiro -> passageiro;
-  
+  ultimo -> proximo = no_passageiro -> proximo;
+
   return passageiro_retirado;
 }
 // Retorna -1 se a lista for nulo, retorna 1 se a lista for vazia, e retorna
@@ -481,19 +486,27 @@ int lista_voo_insere(ListaVoo *lista, Voo *voo){
     if(aux != NULL){
       return 0;
     }
+    
+  }
+  if (lista->primeiro == NULL){
+    No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
+    novo->voo = voo;
+    novo->proximo = NULL;
+    lista->primeiro = novo;
+  }
+  else {
     No_Voo* ultimo = lista->primeiro;
     while (ultimo->proximo != NULL){
       ultimo = ultimo->proximo;
     }
-    No_Voo* novo = no_voo_cria(voo);
-    ultimo->proximo = novo;
-    return 1;    
+  No_Voo* novo = (No_Voo *)malloc(sizeof(No_Voo));
+  novo->voo = voo;
+  novo->proximo = NULL;
+  ultimo->proximo = novo;
+    
   }
-  else if (lista->primeiro == NULL){
-    No_Voo* novo = no_voo_cria(voo);
-    lista->primeiro = novo;
-    return 1;
-  }
+  return 1;
+  
 }
 
 
@@ -518,8 +531,9 @@ Voo* lista_voo_retira(ListaVoo* lista, int codigo){
   if (lista -> primeiro == no_voo){
     lista -> primeiro = no_voo -> proximo;
   }
+   Voo* voo_retirado = no_voo -> voo;
   ultimo -> proximo = no_voo -> proximo;
-  Voo* voo_retirado = no_voo -> voo;
+ 
   return voo_retirado;
 }
 

@@ -209,7 +209,7 @@ int teste_lista_passageiro_retira() {
       passageiro = lista_passageiro_retira(lista, 2);
       if (passageiro_igual(passageiro, jaco) == 1) {
         passageiro = lista_passageiro_retira(lista, 3);
-        if (passageiro_igual(passageiro, jose) == 1 && lista_passageiro_retira(lista, 1) && lista_passageiro_retira(NULL, 1) == NULL) {
+        if (passageiro_igual(passageiro, jose) == 1 && lista_passageiro_retira(lista, 1) == NULL && lista_passageiro_retira(NULL, 1) == NULL) {
           printf("[Passou] - lista_passageiro_retira()\n");
           return 1;
         } else {
@@ -1410,7 +1410,7 @@ int teste_inicializar_hash(){
     TabelaViagem* novo_hash = cria_hash(tamanho);
     if (novo_hash != NULL){
         inicializar_hash(novo_hash);
-        if (ponteiro_hash(novo_hash) != NULL);{
+        if (ponteiro_hash(novo_hash) == NULL){
             printf("\n[Passou] - inicializar_hash()");
             return 1;
     }
@@ -1600,6 +1600,7 @@ int main(void) {
   //Testes Hash
   teste_cria_hash();
   teste_inicializar_hash();
+
   teste_inserir_hash();
   teste_buscar_hash();
   

@@ -43,3 +43,8 @@ gcc -c .\TravelBooking.c -o .\TravelBooking.o
 gcc -c .\TestaTravelBooking.c -o .\TestaTravelBooking.o          
 gcc -o .\TestaTravelBooking.bin .\TestaTravelBooking.o .\TravelBooking.o
 .\TestaTravelBooking.bin
+
+gcc -c TravelBooking.c -o TravelBooking.o
+gcc -c TestaTravelBooking.c -o TestaTravelBooking.o 
+gcc -o TestaTravelBooking.bin  TestaTravelBooking.o TravelBooking.o
+./TestaTravelBooking.bin
