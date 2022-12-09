@@ -1063,6 +1063,8 @@ void imprimir_viagem(TabelaViagem* tabela, int indice){
    printf("\t Reserva %d\n",ordem); 
    printf("Codigo da reserva: %d\n", aux->reserva->codigo);
    printa_data(aux->reserva->data_viagem);
+   printf("Origem: %s\n",aux->reserva->voo->origem); 
+   printf("Destino: %s\n",aux->reserva->voo->destino); 
    printf("Codigo do Voo: %d\n",aux->reserva->voo->codigo);
    printf("Nome do passageiro: %s\n", aux->reserva->passageiro->nome);
    printf("Id do passageiro: %d\n", aux->reserva->passageiro->id); 

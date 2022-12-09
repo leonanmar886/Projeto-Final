@@ -32,7 +32,8 @@ Algumas restrições:
    compatíveis (isto é, a data da viagem do próximo trecho deve ser maior que a data da do trecho anterior)
 - Passageiros não podem criar viagens com interseção temporal (isto é, períodos de tempo conicidentes entre inicio e fim de cada viagem)
 
-Os arquivos `TravelBooking.c` e `TravelBooking.h` traz algums trechos de código úteis para a implementação do trabalho. No arquivo `TravelBooking.c`, cada equipe deverá escrever casos de teste que evidenciem as funcionalidades do sistema e que ele está respeitando todas as restrições estabelecidas. 
+Os arquivos `TravelBooking.c` e `TravelBooking.h` traz algums trechos de código úteis para a implementação do trabalho. No arquivo `TravelBooking.c`,
+cada equipe deverá escrever casos de teste que evidenciem as funcionalidades do sistema e que ele está respeitando todas as restrições estabelecidas. 
 
 gcc -c .\TravelBooking.c -o .\TravelBooking.o
 gcc -c .\TestaTravelBooking.c -o .\TestaTravelBooking.o          
