@@ -68,8 +68,7 @@ struct viagem {
 
 struct tabela_viagem {
   int tamanho;
-  //Viagem *tabela_hash;
-  Viagem* t[];
+  Viagem *tabela_hash;
 };
 
 int data_tamanho(){return sizeof(Data);}
@@ -704,7 +703,7 @@ Reserva* conteudo_agenda(Agenda* no){
  * mesma chave que outro nó previamente inserido na árvore. */
 
 Agenda* insere_no_agenda (Agenda* raiz, Agenda* no){
-  if(raiz == NULL || no == NULL) return NULL;
+  if(raiz == NULL || no == NULL) {return NULL;}
 
   Agenda* x = raiz;
   Agenda* y = NULL;
@@ -714,14 +713,16 @@ Agenda* insere_no_agenda (Agenda* raiz, Agenda* no){
   int chave_x = data_inteiro(x->reserva->data_viagem);
   int chave_no = data_inteiro(no->reserva->data_viagem);
   while(x != NULL){
+    chave_x = data_inteiro(x->reserva->data_viagem);
     y = x;
     if(chave_no < chave_x){
       x = x->esq;
-    } else if (chave_no > chave_x){
-      x = x->dir;      
+    } 
+    else if (chave_no > chave_x){
+      x = x->dir;
     } 
      // Caso seja a mesma reserva (sem datas ou codigos diferentes) ou apenas o codigo da reserva seja igual 
-    else if(reserva_igual(no->reserva,x->reserva) == 1 || no->reserva->codigo == x->reserva->codigo){
+    else if(reserva_igual(no->reserva,x->reserva) == 1 || no->reserva->codigo == x->reserva->codigo || (voo_igual(no->reserva->voo, x->reserva->voo) == 1 && no->reserva->assento == x -> reserva ->assento) ){
       return NULL;
     }
     else{// caso os nós possuam a mesma chave 
@@ -906,33 +907,30 @@ int eh_primo(int valor){
   }
   return 1;
 }
-TabelaViagem* cria_hash(int size){
+
+TabelaViagem* cria_hash(int tamanho){
   
   TabelaViagem* novo_hash = (TabelaViagem*)malloc(sizeof(TabelaViagem));
-  novo_hash->t[0] = NULL;
-  //novo_hash->tabela_hash = NULL;
+  int size = ((tamanho * 2 + 1));
+  while(eh_primo(size) == 0){
+    size++;
+  }
+  Viagem* vetor = (Viagem*) malloc(sizeof(Viagem*) * size);
+  novo_hash -> tabela_hash = vetor;
   novo_hash->tamanho = size; 
   return novo_hash;
 }
 
 
-void inicializar_tabela( Viagem* roteiros[], TabelaViagem* tabela){
-  int size  = (tabela->tamanho*2)+1;
-  while(eh_primo(size) == 0){
-    size++;
-  }
-  tabela->tamanho = size;
- 
-  for(int i=0;i < tabela->tamanho; i++){
-    roteiros[i] = NULL;
-  }
-  tabela->t[0] = roteiros[0]; 
+void inicializar_hash(TabelaViagem* tabela){
+  for(int i=0; i < tabela->tamanho; i++){
+    (&(tabela -> tabela_hash))[i] = NULL;
+  } 
 }
 
-int codigo_hash(Viagem* lista){
-
+int codigo_hash(Viagem* viagem){
   int soma = 0; 
-  Trecho* aux = lista->primeiro_trecho;
+  Trecho* aux = viagem->primeiro_trecho;
   
   while(aux->proximo!=NULL){
     soma+=aux->reserva->codigo;
@@ -943,45 +941,45 @@ int codigo_hash(Viagem* lista){
   return soma;
 }
 
-int funcaoHash(int codigoHash, TabelaViagem* tabela){  
+int funcaoHash(TabelaViagem* tabela, int codigoHash){  
   return codigoHash % tabela->tamanho;
 }
 
-int inserir_tabela( Viagem* roteiros[],Viagem* viagem, TabelaViagem* tabela){
-  int id = funcaoHash(codigo_hash(viagem),tabela);
+int inserir_hash(TabelaViagem* tabela, Viagem* viagem){
+  int id = funcaoHash(tabela, codigo_hash(viagem));
   
-  if(roteiros[id] == NULL){// insere apenas quando nulo para não haver colisão
-   roteiros[id] = viagem;
-   tabela->t[id] = roteiros[id];
+  if((&(tabela -> tabela_hash))[id] == NULL){// insere apenas quando nulo para não haver colisão
+   (&(tabela -> tabela_hash))[id] = viagem;
    return 1;
     }  
   return 0;
 }
-Viagem* busca_tabela(Viagem* roteiros[], Viagem* viagem, TabelaViagem* tabela){
-  int id = funcaoHash(codigo_hash(viagem),tabela);
-  if(roteiros[id]!= NULL){
-    if(roteiros[id] == viagem ){
-      return viagem;
-    }
+
+Viagem* busca_hash(TabelaViagem* tabela, int indice){
+  
+  if((&(tabela->tabela_hash))[indice] != NULL){
+    
+    return &(tabela -> tabela_hash[indice]);
+    
   }
   return NULL;
-}
+} 
 
 // retira um roteiro de viagem da Tabela e atribui NULL, retorna NULL caso já for NULL
 //, e o roteiro caso contrário
 
-Viagem* retira_hash(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem ){
-  int id = funcaoHash(codigo_hash(viagem),tabela);
-   Viagem* aux[tabela->tamanho];
-  if(roteiros[id] == NULL){
+Viagem* retira_hash(TabelaViagem* tabela, int indice){
+  
+  Viagem* aux;
+  if((&(tabela -> tabela_hash))[indice] == NULL){
     return NULL;
   } 
   else{
     
-   aux[id] = roteiros[id];
-    roteiros[id] = NULL;
+    aux = (&(tabela -> tabela_hash))[indice];
+    (&(tabela -> tabela_hash))[indice] = NULL;
   }
-  return aux[id];
+  return aux;
 }
 
 //
@@ -993,23 +991,51 @@ int libera_hash(TabelaViagem** tabela){
   return 1;
 }
 
-void imprimir_viagem(Viagem* roteiros[],TabelaViagem* tabela, Viagem* viagem){
-  int id = funcaoHash(codigo_hash(viagem),tabela);
-   
-  Trecho* aux = roteiros[id]->primeiro_trecho ;
+int tamanho_hash(TabelaViagem* tabela){
+  return tabela -> tamanho;
+}
+
+Viagem* ponteiro_hash(TabelaViagem* tabela){
+  return tabela -> tabela_hash;
+}
+
+void imprimir_viagem(TabelaViagem* tabela, int indice){
   
+   
+  Trecho* aux = (&(tabela -> tabela_hash))[indice]->primeiro_trecho ;
+  int ordem = 1;
   printf("\tINTINERÁRIO DA VIAGEM:\n");
   while(aux!=NULL){
+    
    printf("**************************************\n");
+   printf("\t Reserva %d",ordem)/ 
    printf("Codigo da reserva: %d\n", aux->reserva->codigo);
    printa_data(aux->reserva->data_viagem);
    printf("Codigo do Voo: %d\n",aux->reserva->voo->codigo);
-   printf("Assento do Voo:%d\n",aux->reserva->assento);
-    
-    aux = aux->proximo;
+   printf("Nome do passageiro: %s\n", aux->reserva->passageiro->nome);
+   printf("Id do passageiro: %d\n", aux->reserva->passageiro->id); 
+   printf("Endereço do passageiro: %s\n", aux->reserva->passageiro->endereco);
+   ordem++;  
+   aux = aux->proximo;
   }
 }
 
+int viagem_igual(Viagem* viagem1, Viagem* viagem2){
+  if (viagem1 == NULL || viagem2 == NULL ){return -1;}
+  Trecho* trecho_x = viagem1 -> primeiro_trecho;
+  Trecho* trecho_y = viagem2 -> primeiro_trecho;
+
+   while(trecho_x != NULL || trecho_y != NULL){
+    if (trecho_igual(trecho_x, trecho_y) == 1){
+      trecho_x = trecho_x -> proximo;
+      trecho_y = trecho_y -> proximo;
+    }
+    if (trecho_x == NULL && trecho_y == NULL){
+      return 1;
+    }
+    return 0;
+  }
+}
 //***************************************** Viagem **************************************
 
 // Retorna 1 se as reserva não são do mesmo passageiro, ou se as datas das reservas não estão numa ordem 

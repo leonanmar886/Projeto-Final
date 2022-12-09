@@ -76,7 +76,7 @@ TabelaViagem* cria_hash(int tamanho){
 }
 
 
-void inicializar_tabela(TabelaViagem* tabela, Viagem* viagem){
+void inicializar_tabela(TabelaViagem* tabela){
   for(int i=0; i < tabela->tamanho; i++){
     (&(tabela -> tabela_hash))[i] = NULL;
   } 

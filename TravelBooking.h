@@ -315,3 +315,29 @@ int trecho_igual(Trecho* trecho1, Trecho* trecho2);
 Trecho* trecho_cria(Reserva* reserva);
 
 int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino);
+
+int eh_primo(int valor);
+
+TabelaViagem* cria_hash(int tamanho);
+
+void inicializar_hash(TabelaViagem* tabela);
+
+int codigo_hash(Viagem* viagem);
+
+int funcaoHash(TabelaViagem* tabela, int codigoHash);
+
+int inserir_hash(TabelaViagem* tabela, Viagem* viagem);
+
+Viagem* busca_hash(TabelaViagem* tabela, int indice);
+
+Viagem* retira_hash(TabelaViagem* tabela, int indice);
+
+int libera_hash(TabelaViagem** tabela);
+
+void imprimir_viagem(TabelaViagem* tabela, int indice);
+
+int tamanho_hash(TabelaViagem* tabela);
+
+Viagem* ponteiro_hash(TabelaViagem* tabela);
+
+int viagem_igual(Viagem* viagem1, Viagem* viagem2);

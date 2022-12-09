@@ -815,12 +815,14 @@ void teste_insere_no_agenda() {
   Data* data2 = data_nova(12,12,2021);
   Assento assento2 = B7;
   Passageiro *passageiro2 = passageiro_novo(3, "Mauricio Marques", "Rua Carlos Vasconcelos, 150");
+  
   Voo *voo2 = voo_novo(12, "Montevideu", "Buenos Aires");
-
+  Passageiro *passageiro3 = passageiro_novo(5, "Jonas Esticado", "Rua Nunes Valente, 1540");
   Reserva* reserva2 = reserva_nova(2, data2, passageiro2, voo2, assento2);
+  Reserva* reserva3 = reserva_nova(45, data2, passageiro3, voo2, assento2);
 
   Agenda* no = criar_no_agenda(data2, reserva2);
-
+  Agenda* no_2 = criar_no_agenda(data2, reserva3);
   raiz = insere_no_agenda(raiz, no);
 
   int codigo = data_inteiro(data2);
@@ -831,8 +833,9 @@ void teste_insere_no_agenda() {
 
   if(chave_agenda(abb_busca_agenda_data_passageiro(raiz, id2,data2)) == chave_agenda(no) 
     && insere_no_agenda(NULL, NULL) == NULL){
+      if (insere_no_agenda(raiz, no_2) == NULL){
       printf("[Passou] - insere_no_agenda()\n");
-    
+      }
   } else {
       printf("[Falhou] - insere_no_agenda()\n");
   }
@@ -1225,7 +1228,7 @@ float teste_viagem_vazia() {
 
 float teste_viagem_insere() {
     Viagem *viagem = lista_viagem_cria();
-
+    if (viagem != NULL){
     Data *data1 = data_nova(16, 4, 2023);
     Data *data2 = data_nova(12, 12, 2021);
     Data *data3 = data_nova(12, 12, 2024);
@@ -1241,13 +1244,14 @@ float teste_viagem_insere() {
     Reserva *reserva2 = reserva_nova(1, data2, passageiro2, voo2, assento2);
     Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento2);
 
-
     if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 0 && lista_viagem_insere(viagem, NULL) == -1 && lista_viagem_insere(viagem, reserva3) == 1) {
         printf("[Passou] - viagem_insere()\n");
         return 1;
     } else {
         printf("[Falhou] - viagem_insere()\n");
     }
+    }
+    printf("[Falhou] - viagem_insere()\n");
     return 0;
 }
 
@@ -1291,7 +1295,7 @@ float teste_viagem_primeiro() {
     return 0;
 }
 
-float testa_viagem_busca() {
+float teste_viagem_busca() {
     Viagem *viagem = lista_viagem_cria();
     if (viagem != NULL) {
         Data *data1 = data_nova(16, 4, 2023);
@@ -1388,6 +1392,145 @@ float teste_viagem_retira() {
     return 0;
 }
 
+int teste_cria_hash(){
+    printf("************************************************ TESTE HASH ************************************************");
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL && tamanho_hash(novo_hash) != 0 && ponteiro_hash(novo_hash) != NULL){
+        printf("\n[Passou] - cria_hash()");
+    }
+    else{
+    printf("\n[Falhou] - cria_hash()");
+    }
+    return 1;
+}
+
+int teste_inicializar_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        if (ponteiro_hash(novo_hash) != NULL);{
+            printf("\n[Passou] - inicializar_hash()");
+            return 1;
+    }
+    }
+    printf("\n[Falhou] - inicializar_hash()");
+}
+
+int teste_inserir_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 && lista_viagem_insere(viagem, reserva3) == 1){
+                if (inserir_hash(novo_hash, viagem) == 1){
+                    printf("\n[Passou] - inserir_hash()");
+                    return 1;
+                }
+                else{
+                    printf("\n[Falhou] - inserir_hash()");
+                }
+            }
+            else{
+            printf("\n[Falhou] - inserir_hash()");
+            }
+            }
+            else{
+                printf("\n[Falhou] - inserir_hash()");
+            }
+
+}
+printf("\n[Falhou] - inserir_hash()");
+}
+
+int teste_buscar_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 && lista_viagem_insere(viagem, reserva3) == 1){
+              if (inserir_hash(novo_hash, viagem) == 1){
+                int id = funcaoHash(novo_hash, codigo_hash(viagem));
+                Viagem* aux = busca_hash(novo_hash, id);
+                if (viagem_igual(viagem, aux) == 1){
+                  printf("\n[Passou] - busca_hash()");
+                  return 1;
+                }
+              }
+            }
+        }
+    }
+    printf("\n[Falhou] - busca_hash()");
+    return 0;
+}
+
+int teste_retira_hash(){
+    int tamanho = 10;
+    TabelaViagem* novo_hash = cria_hash(tamanho);
+    if (novo_hash != NULL){
+        inicializar_hash(novo_hash);
+        
+        Viagem *viagem = lista_viagem_cria();
+        if (viagem != NULL) {
+            Data *data1 = data_nova(16, 4, 2023);
+            Data *data2 = data_nova(25, 4, 2023);
+            Data *data3 = data_nova(8, 5, 2023);
+            Assento assento1 = A0;
+            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
+            Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
+            Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
+
+            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            if (lista_viagem_insere(viagem, reserva1) == 1 && lista_viagem_insere(viagem, reserva2) == 1 && lista_viagem_insere(viagem, reserva3) == 1){
+              if (inserir_hash(novo_hash, viagem) == 1){
+                int id = funcaoHash(novo_hash, codigo_hash(viagem));
+                Viagem* aux_1 = retira_hash(novo_hash, id);
+                Viagem* aux_2 = busca_hash(novo_hash, id);
+                if (viagem_igual(viagem, aux_1) == 1 && aux_2 == NULL){
+                  printf("\n[Passou] - retira_hash()");
+                  return 1;
+                }
+              }
+            }
+        }
+    }
+    printf("\n[Falhou] - retira_hash()");
+    return 0;
+}
 
 int main(void) {
   
@@ -1451,8 +1594,14 @@ int main(void) {
   teste_viagem_vazia();
   teste_viagem_insere();
   teste_viagem_primeiro();
-  testa_viagem_busca();
+  teste_viagem_busca();
   teste_viagem_retira();
+
+  //Testes Hash
+  teste_cria_hash();
+  teste_inicializar_hash();
+  teste_inserir_hash();
+  teste_buscar_hash();
   
   return 0;
 }
