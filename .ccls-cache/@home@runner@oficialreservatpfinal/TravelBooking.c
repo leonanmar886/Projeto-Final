@@ -950,6 +950,7 @@ int codigo_hash(Viagem* viagem){
     soma+=aux->reserva->codigo;
     aux = aux->proximo;
   }
+  soma+= aux->reserva->codigo;
   soma += aux->reserva->passageiro->id;
   
   return soma;

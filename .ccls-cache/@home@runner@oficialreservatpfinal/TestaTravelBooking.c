@@ -1610,7 +1610,7 @@ int main(void) {
   teste_buscar_hash();
   teste_retira_hash();
 
-   int tamanho = 10;
+   int tamanho = 5;
     TabelaViagem* novo_hash = cria_hash(tamanho);
         inicializar_hash(novo_hash);        
         Viagem *viagem = lista_viagem_cria();
@@ -1619,21 +1619,25 @@ int main(void) {
             Data *data2 = data_nova(25, 5, 2023);
             Data *data3 = data_nova(8, 7, 2023);
             Assento assento1 = A0;
-            Passageiro *passageiro1 = passageiro_novo(1, "Roberta Montenegro", "Av. Humberto Monte, 2202");
+            Passageiro *passageiro1 = passageiro_novo(9008, "Roberta Montenegro", "Av. Humberto Monte, 2202");
             Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
             Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
             Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
 
-            Reserva *reserva1 = reserva_nova(1, data1, passageiro1, voo1, assento1);
-            Reserva *reserva2 = reserva_nova(2, data2, passageiro1, voo2, assento1);
-            Reserva *reserva3 = reserva_nova(3, data3, passageiro1, voo3, assento1);
+            Reserva *reserva1 = reserva_nova(534, data1, passageiro1, voo1, assento1);
+            Reserva *reserva2 = reserva_nova(893, data2, passageiro1, voo2, assento1);
+            Reserva *reserva3 = reserva_nova(512, data3, passageiro1, voo3, assento1);
              
             
            lista_viagem_insere(viagem, reserva1);
            lista_viagem_insere(viagem, reserva2) ;
            lista_viagem_insere(viagem, reserva3) ;
+  int cod = codigo_hash(viagem);
   int id = funcaoHash(novo_hash, codigo_hash(viagem));
+  
   inserir_hash(novo_hash, viagem); 
   imprimir_viagem(novo_hash, id);
+
+
   return 0;
 }
