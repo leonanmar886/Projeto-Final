@@ -33,117 +33,111 @@ Data* data_nova(int dia, int mes, int ano);
 // Exibe a data usando printf
 void printa_data(Data* data);
 
-int data_inteiro(Data* data); // Retorna um inteiro referente ao número de dias da data
+// Retorna apenas um inteiro para ser a chave da data;
+int data_inteiro(Data* data);
 
-// ********** Passageiro.h ******************
 
-// verifica se algum dos valores na struct passageiro é nulo. Se sim, retorna -1. Se não, retorna 1
+
+
+// *********************** Passageiro.h ***********************
+
+
+
+
+// Verifica se algum dos valores na struct passageiro é nulo. Se sim, retorna -1. Se não, retorna 1
 int passageiro_verifica(Passageiro *passageiro);
 
-/* Aloca e retorna um passageiro com os dados passados por parâmetro. Porém, para os
- * casos em que (i) pelo menos um dos parâmetros sejam nulos <-1, NULL, NULL>; e
- * (ii) o tamanho das strings origem e destino sejam maiores que os da especificação
- * (50 e 30, respectivamente), a função deve retornar NULL. Ok*/
+// Aloca e retorna um passageiro com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL
 Passageiro *passageiro_novo(int codigo, char *nome, char *endereco);
 
-/* Libera a memória de um passageiro previamente criado e atribui NULL ao passageiro. Ok*/
+// Libera a memória de um passageiro previamente criado e atribui NULL ao passageiro. Ok*/
 void passageiro_libera(Passageiro **passageiro);
 
-/* Copia os valores de um passageiro para as referências informadas. Em caso de passageiro
- * NULL, atribuir valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok */
+// Copia os valores de um passageiro para as referências informadas. Em caso de passageiro NULL, atribui valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok
 void passageiro_acessa(Passageiro *passageiro, int *codigo, char *origem, char *destino);
 
-/* Atribui novos valores aos campos de um passageiro. Porém, para os casos em que (i)
- * algum dos parâmetros sejam nulos <NULL, -1, NULL, NULL>; ou (ii) o tamanho
- * das strings origem e destino sejam maiores que os da especificação (50 e 30,
- * respectivamente), a função não deve fazer a atribuição. Ok */
+// Atribui novos valores aos campos de um passageiro. Porém, para os casos em que algum dos parâmetros seja NULL ou as strings ultrapassem o tamanho limite, a função não deve fazer a atribuição. Ok
 void passageiro_atribui(Passageiro *passageiro, int codigo, char *origem, char *destino);
 
-/* Avalia se dois passageiros são iguas. A função deve retornar 1 se os passageiros
- * possuem os mesmos dados, 0 caso os dados dos passageiros possuam alguma diferença
- * e -1 caso pelo menos um dos passageiros seja NULL Ok.
- */
+// Avalia se dois passageiros são iguas. A função retorna 1 se os passageiros possuem os mesmos dados, retorna 0 se os dados dos passageiros possuem alguma diferença e retorna -1 se pelo menos um dos passageiros seja NULL Ok
 int passageiro_igual(Passageiro *passageiro1, Passageiro *passageiro2);
 
-/* Retorna o tamanho em bytes do TAD aluno. Ok */
+// Retorna o tamanho em bytes do TAD aluno. Ok
 int passageiro_tamanho();
 
-// *********************** listaPassageiro.h ********************
 
+
+
+// *********************** listaPassageiro.h ***********************
+
+
+
+
+// Cria um nó do tipo No_Passageiro
 struct no_passageiro* no_passageiro_cria(Passageiro* passageiro);
 
-/* Aloca espaço em memória e retorna uma ListaPassageiro ok */
+// Aloca espaço em memória e retorna uma ListaPassageiro ok
 ListaPassageiro *lista_passageiro_cria();
 
-/* Libera a memória de uma ListaPassageiro previamente criada e atribui NULL ao ponteiro
- * ListaPassageiro. Retorna 1 caso seja possível fazer a liberação e 0 caso a ListaPassageiro
- * informada seja NULL. ok */
+// Libera a memória de uma ListaPassageiro criada anteriormente e atribui NULL ao ponteiro ListaPassageiro. Retorna 1 caso seja possível fazer a liberação e retorna 0 caso a ListaPassageiro informada seja NULL. ok
 int lista_passageiro_libera(ListaPassageiro **ListaPassageiro);
 
-/* Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já
- * exista um Passageiro com a mesma id (nesse caso, o Passageiro não pode ser
- * adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL ok
- */
+// Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já exista um Passageiro com o mesmo id (nesse caso, o Passageiro será adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL ok
 int lista_passageiro_insere(ListaPassageiro *ListaPassageiro, Passageiro *Passageiro);
 
-/* Remove um Passageiro na ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja vazia ou
- * seja NULL ok */
+// Remove um Passageiro na ListaPassageiro. Retorna o Passageiro retirado ou NULL se a ListaPassageiro estiver vazia, ou seja, NULL ok
 Passageiro *lista_passageiro_retira(ListaPassageiro *ListaPassageiro, int id);
 
-/* Recupera o primeiro Passageiro da ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja
- * vazia ou seja NULL */
+// Recupera o primeiro Passageiro da ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja vazia ou seja NULL
 Passageiro *lista_passageiro_primeiro(ListaPassageiro *ListaPassageiro);
 
-/* Busca Passageiro pelo número de id. Retorna o Passageiro se este estiver na
- * lista e NULL caso contrário, isto é, (i) ListaPassageiro vazia; (ii) não exista Passageiro
- * com a id fornecida; ou (iii) a ListaPassageiro seja NULL ok */
+// Busca Passageiro pelo número de id. Retorna o Passageiro se este estiver na lista e NULL caso a lista seja vazia, não exista passageiro com o id fornecido ou a lista seja NULL
 Passageiro *lista_passageiro_busca(ListaPassageiro *ListaPassageiro, int id);
 
-/* Verifica se a ListaPassageiro está vazia. Retorna 1 se a ListaPassageiro estiver vazia, 0 caso não
- * esteja vazia e -1 se a ListaPassageiro for NULL ok
- */
+//Retorna 1 se a ListaPassageiro estiver vazia, 0 se não estiver e -1 se ela for NULL ok
 int lista_passageiro_vazia(ListaPassageiro *ListaPassageiro);
 
 
-/* Computa a quantidade de Passageiros na lista. Retorna a quantidade de Passageiros
- * ou -1, caso a lista for NULL. ok 
- */
+// Calcula a quantidade de Passageiros na lista. Retorna a quantidade de Passageiros ou -1, se a lista for NULL. ok 
 int lista_passageiro_quantidade(ListaPassageiro *lista);
 
-//***************** Voo.h **************************
+
+
+
+// *********************** Voo.h ***********************
+
+
+
+
 // verifica se algum dos valores na struct voo é nulo. Se sim, retorna -1. Se não, retorna 1
 int voo_verifica(Voo *voo);
 
-/* Aloca e retorna um Voo com os dados passados por parâmetro. Porém, para os
- * casos em que (i) pelo menos um dos parâmetros sejam nulos <-1, NULL, NULL>; e
- * (ii) o tamanho das strings origem e destino sejam maiores que os da especificação
- * (50 e 30, respectivamente), a função deve retornar NULL. Ok*/
+// Aloca e retorna um Voo com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL Ok
 Voo *voo_novo(int codigo, char *origem, char *destino);
 
-/* Libera a memória de um Voo previamente criado e atribui NULL ao Voo. Ok*/
+// Libera a memória de um Voo previamente criado e atribui NULL ao Voo. Ok
 void voo_libera(Voo **Voo);
 
-/* Copia os valores de um Voo para as referências informadas. Em caso de Voo
- * NULL, atribuir valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok */
+// Copia os valores de um Voo para as referências informadas. Em caso de Voo NULL, atribui valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok
 void voo_acessa(Voo *Voo, int *codigo, char *origem, char *destino);
 
-/* Atribui novos valores aos campos de um Voo. Porém, para os casos em que (i)
- * algum dos parâmetros sejam nulos <NULL, -1, NULL, NULL>; ou (ii) o tamanho
- * das strings origem e destino sejam maiores que os da especificação (50 e 30,
- * respectivamente), a função não deve fazer a atribuição. Ok */
+// Atribui novos valores aos campos de um Voo. Porém, para os casos em que algum dos parâmetros seja NULL ou as strings ultrapassem o tamanho limite, a função não deve fazer a atribuição. Ok
 void voo_atribui(Voo *Voo, int codigo, char *origem, char *destino);
 
-/* Avalia se dois Voos são iguas. A função deve retornar 1 se os Voos
- * possuem os mesmos dados, 0 caso os dados dos Voos possuam alguma diferença
- * e -1 caso pelo menos um dos Voos seja NULL Ok.
- */
+// Avalia se dois Voos são iguas. A função retorna 1 se os Voos possuem os mesmos dados, retorna 0 se os dados dos Voos possuem alguma diferença e retorna -1 se pelo menos um dos Voos seja NULL Ok
 int voo_igual(Voo *Voo1, Voo *Voo2);
 
-/* Retorna o tamanho em bytes do TAD aluno. Ok */
+// Retorna o tamanho em bytes do TAD Voo. Ok
 int voo_tamanho();
 
-// ******************** listaVoo.h **********************
 
+
+
+// *********************** listaVoo.h ***********************
+
+
+
+// Cria um nó do tipo No_Voo
 struct no_voo* no_voo_cria(Voo* voo);
 
 /* Aloca espaço em memória e retorna uma ListaVoo ok */
@@ -186,7 +180,11 @@ int lista_voo_quantidade(ListaVoo *lista);
 
 
 
-//****************** Reserva.h *********************
+
+// *********************** Reserva.h ***********************
+
+
+
 
 // verifica se algum dos valores na struct Reserva é nulo. Se sim, retorna -1. Se não, retorna 1
 int reserva_verifica(Reserva *reserva, int codigo,Data *data,Passageiro *passageiro,Voo *voo, Assento assento);
@@ -269,12 +267,18 @@ int chave_agenda(Agenda* no);
 //Retorna o conteudo da reserva ou NULL caso a reserva seja NULL. *
 Reserva* conteudo_agenda(Agenda *agenda);
 
+/* Retorna o sucessor do nó */
 Agenda *Sucessor(Agenda *agenda);
 
+/* Retorna nó mínimo da agenda */
 Agenda *Minimo (Agenda *agenda);
 
+/* Aloca espaço em memória e retorna uma ListaPassageiro */
 Viagem* lista_viagem_cria();
 
+/* Busca Voo pelo número de codigo. Retorna o Voo se este estiver na
+ * lista e NULL caso contrário, isto é, (i) ListaVoo vazia; (ii) não exista Voo
+ * com a codigo fornecida; ou (iii) a ListaVoo seja NULL ok */
 Reserva* lista_viagem_busca(Viagem* viagem, int codigo);
 
 int lista_viagem_insere(Viagem* viagem, Reserva* reserva);

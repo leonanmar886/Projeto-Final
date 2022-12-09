@@ -986,7 +986,7 @@ Viagem *busca_hash(TabelaViagem *tabela, int indice) {
 
   if ((&(tabela->tabela_hash))[indice] != NULL) {
 
-    return &(tabela->tabela_hash[indice]);
+    return (&(tabela->tabela_hash))[indice];
   }
   return NULL;
 }
@@ -1015,6 +1015,9 @@ int libera_hash(TabelaViagem **tabela) {
 
   free(*tabela);
   *tabela = NULL;
+   for (int i = 0; i < (*tabela)->tamanho; i++) {
+   free(&(*tabela)->tabela_hash[i]);
+  }
   return 1;
 }
 
