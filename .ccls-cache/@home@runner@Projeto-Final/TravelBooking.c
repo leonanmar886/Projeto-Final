@@ -502,6 +502,7 @@ int lista_voo_insere(ListaVoo *lista, Voo *voo) {
       return 0;
     }
   }
+  
   if (lista->primeiro == NULL) {
     No_Voo *novo = (No_Voo *)malloc(sizeof(No_Voo));
     novo->voo = voo;
@@ -986,7 +987,7 @@ Viagem *busca_hash(TabelaViagem *tabela, int indice) {
 
   if ((&(tabela->tabela_hash))[indice] != NULL) {
 
-    return &(tabela->tabela_hash[indice]);
+    return (&(tabela->tabela_hash))[indice];
   }
   return NULL;
 }
@@ -1015,6 +1016,9 @@ int libera_hash(TabelaViagem **tabela) {
 
   free(*tabela);
   *tabela = NULL;
+   for (int i = 0; i < (*tabela)->tamanho; i++) {
+   free(&(*tabela)->tabela_hash[i]);
+  }
   return 1;
 }
 

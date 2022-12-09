@@ -502,6 +502,7 @@ int lista_voo_insere(ListaVoo *lista, Voo *voo) {
       return 0;
     }
   }
+  
   if (lista->primeiro == NULL) {
     No_Voo *novo = (No_Voo *)malloc(sizeof(No_Voo));
     novo->voo = voo;

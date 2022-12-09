@@ -82,24 +82,20 @@ ListaPassageiro *lista_passageiro_cria();
 // Libera a memória de uma ListaPassageiro criada anteriormente e atribui NULL ao ponteiro ListaPassageiro. Retorna 1 caso seja possível fazer a liberação e retorna 0 caso a ListaPassageiro informada seja NULL. ok
 int lista_passageiro_libera(ListaPassageiro **ListaPassageiro);
 
-// Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já exista um Passageiro com o mesmo id (nesse caso, o Passageiro será adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL ok
+// Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já exista um Passageiro com o mesmo id (nesse caso, o Passageiro será adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL. ok
 int lista_passageiro_insere(ListaPassageiro *ListaPassageiro, Passageiro *Passageiro);
 
-// Remove um Passageiro na ListaPassageiro. Retorna o Passageiro retirado ou NULL se a ListaPassageiro estiver vazia, ou seja, NULL ok
+// Remove um Passageiro na ListaPassageiro. Retorna o Passageiro retirado ou NULL se a ListaPassageiro estiver vazia, ou seja, NULL. ok
 Passageiro *lista_passageiro_retira(ListaPassageiro *ListaPassageiro, int id);
 
-// Recupera o primeiro Passageiro da ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja vazia ou seja NULL
+// Recupera o primeiro Passageiro da ListaPassageiro. Retorna o Passageiro ou NULL caso a ListaPassageiro esteja vazia ou seja NULL.
 Passageiro *lista_passageiro_primeiro(ListaPassageiro *ListaPassageiro);
 
-// Busca Passageiro pelo número de id. Retorna o Passageiro se este estiver na lista e NULL caso a lista seja vazia, não exista passageiro com o id fornecido ou a lista seja NULL
+// Busca Passageiro pelo número de id. Retorna o Passageiro se este estiver na lista e NULL caso a lista seja vazia, não exista passageiro com o id fornecido ou a lista seja NULL.
 Passageiro *lista_passageiro_busca(ListaPassageiro *ListaPassageiro, int id);
 
-//Retorna 1 se a ListaPassageiro estiver vazia, 0 se não estiver e -1 se ela for NULL ok
+// Retorna 1 se a ListaPassageiro estiver vazia, 0 se não estiver e -1 se ela for NULL. ok
 int lista_passageiro_vazia(ListaPassageiro *ListaPassageiro);
-
-
-// Calcula a quantidade de Passageiros na lista. Retorna a quantidade de Passageiros ou -1, se a lista for NULL. ok 
-int lista_passageiro_quantidade(ListaPassageiro *lista);
 
 
 
@@ -109,10 +105,10 @@ int lista_passageiro_quantidade(ListaPassageiro *lista);
 
 
 
-// verifica se algum dos valores na struct voo é nulo. Se sim, retorna -1. Se não, retorna 1
+// Verifica se algum dos valores na struct voo é incompatível. Se sim, retorna -1. Se não, retorna 1.
 int voo_verifica(Voo *voo);
 
-// Aloca e retorna um Voo com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL Ok
+// Aloca e retorna um Voo com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL. Ok
 Voo *voo_novo(int codigo, char *origem, char *destino);
 
 // Libera a memória de um Voo previamente criado e atribui NULL ao Voo. Ok
@@ -124,7 +120,7 @@ void voo_acessa(Voo *Voo, int *codigo, char *origem, char *destino);
 // Atribui novos valores aos campos de um Voo. Porém, para os casos em que algum dos parâmetros seja NULL ou as strings ultrapassem o tamanho limite, a função não deve fazer a atribuição. Ok
 void voo_atribui(Voo *Voo, int codigo, char *origem, char *destino);
 
-// Avalia se dois Voos são iguas. A função retorna 1 se os Voos possuem os mesmos dados, retorna 0 se os dados dos Voos possuem alguma diferença e retorna -1 se pelo menos um dos Voos seja NULL Ok
+// Avalia se dois Voos são iguas. A função retorna 1 se os Voos possuem os mesmos dados, retorna 0 se os dados dos Voos possuem alguma diferença e retorna -1 se pelo menos um dos Voos seja NULL. Ok
 int voo_igual(Voo *Voo1, Voo *Voo2);
 
 // Retorna o tamanho em bytes do TAD Voo. Ok
@@ -137,45 +133,32 @@ int voo_tamanho();
 
 
 
-// Cria um nó do tipo No_Voo
+
+// Cria um nó do tipo. No_Voo
 struct no_voo* no_voo_cria(Voo* voo);
 
-/* Aloca espaço em memória e retorna uma ListaVoo ok */
+// Aloca espaço em memória e retorna uma ListaVoo. ok
 ListaVoo *lista_voo_cria();
 
-/* Libera a memória de uma ListaVoo previamente criada e atribui NULL ao ponteiro
- * ListaVoo. Retorna 1 caso seja possível fazer a liberação e 0 caso a ListaVoo
- * informada seja NULL. ok */
+// Libera a memória de uma ListaVoo previamente criada e atribui NULL ao ponteiro ListaVoo. Retorna 1 caso seja possível fazer a liberação e retorna 0 caso a ListaVoo informada seja NULL. ok
 int lista_voo_libera(ListaVoo **ListaVoo);
 
-/* Insere um Voo na ListaVoo. Retorna 1 se foi possível adicionar, 0 caso já
- * exista um Voo com a mesma codigo (nesse caso, o Voo não pode ser
- * adicionado) e -1 caso a ListaVoo ou Voo sejam NULL ok
- */
+// Insere um Voo na ListaVoo. Retorna 1 se foi possível adicionar, retorna 0 se já existe um Voo com o mesmo código (nesse caso, o Voo não pode ser adicionado) e retorna -1 caso a ListaVoo ou o Voo sejam NULL. ok
 int lista_voo_insere(ListaVoo *ListaVoo, Voo *voo);
 
-/* Remove um Voo na ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja vazia ou
- * seja NULL ok */
+// Remove um Voo na ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja vazia ou seja NULL ok
 Voo *lista_voo_retira(ListaVoo *ListaVoo, int codigo);
 
-/* Recupera o primeiro Voo da ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja
- * vazia ou seja NULL */
+// Recupera o primeiro Voo da ListaVoo. Retorna o Voo ou NULL caso a ListaVoo esteja vazia ou seja NULL
 Voo *lista_voo_primeiro(ListaVoo *ListaVoo);
 
-/* Busca Voo pelo número de codigo. Retorna o Voo se este estiver na
- * lista e NULL caso contrário, isto é, (i) ListaVoo vazia; (ii) não exista Voo
- * com a codigo fornecida; ou (iii) a ListaVoo seja NULL ok */
+// Busca Voo pelo número de código. Retorna o Voo se este estiver na lista e NULL caso a lista seja vazia, não exista Voo com o código fornecido ou a lista seja NULL
 Voo *lista_voo_busca(ListaVoo *ListaVoo, int codigo);
 
-/* Verifica se a ListaVoo está vazia. Retorna 1 se a ListaVoo estiver vazia, 0 caso não
- * esteja vazia e -1 se a ListaVoo for NULL ok
- */
+//Retorna 1 se a ListaVoo estiver vazia, 0 se não estiver e -1 se ela for NULL ok
 int lista_voo_vazia(ListaVoo *ListaVoo);
 
-
-/* Computa a quantidade de voos na lista. Retorna a quantidade de voos
- * ou -1, caso a lista for NULL. ok 
- */
+// Computa a quantidade de voos na lista. Retorna a quantidade de voos ou -1, caso a lista seja NULL. ok 
 int lista_voo_quantidade(ListaVoo *lista);
 
 
@@ -186,29 +169,22 @@ int lista_voo_quantidade(ListaVoo *lista);
 
 
 
-// verifica se algum dos valores na struct Reserva é nulo. Se sim, retorna -1. Se não, retorna 1
+// Verifica se algum dos valores na struct Reserva é nulo. Se sim, retorna -1. Se não, retorna 1.
 int reserva_verifica(Reserva *reserva, int codigo,Data *data,Passageiro *passageiro,Voo *voo, Assento assento);
 
-/* Aloca e retorna um Reserva com os dados passados por parâmetro. Porém, para os
- * casos em que (i) pelo menos um dos parâmetros sejam nulos <-1, NULL, NULL>; e
- * (ii) a data seja inferior ao dia 01/12/2023, a função deve retornar NULL. */
+// Aloca e retorna uma Reserva com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou a data seja inferior ao dia 01/12/2023, retorna NULL Ok.
 Reserva *reserva_nova(int codigo, Data *data_viagem, Passageiro *passageiro, Voo *voo, Assento assento);
 
-/* Libera a memória de uma Reserva previamente criada e atribui NULL a Reserva. */
+// Libera a memória de uma Reserva previamente criada e atribui NULL a Reserva.
 int reserva_libera(Reserva **reserva);
 
-/* Copia os valores de uma Reserva para as referências informadas. Em caso de Reserva
- * NULL, atribuir valor padrão <-1, "NULL", "NULL"> aos parâmetros. */
+// Copia os valores de uma Reserva para as referências informadas. Em caso de Reserva NULL, atribui valor padrão <-1, "NULL", "NULL"> aos parâmetros.
 void reserva_acessa(Reserva *reserva, int *codigo, Data **origem, Passageiro **passageiro, Voo **voo, Assento *assento);
 
-/* Atribui novos valores aos campos de uma Reserva. Porém, para os casos em que (i)
- * algum dos parâmetros sejam nulos <NULL, -1, NULL, NULL>; ou (ii) a data seja inferior a 01/12/2022, a função não deve fazer a atribuição. */
+// Atribui novos valores aos campos de uma Reserva. Porém, para os casos em que algum dos parâmetros seja NULL ou a data seja inferior a 01/12/2022, a função não deve fazer a atribuição.
 void reserva_atribui(Reserva *reserva, int codigo, Data *data_viagem, Passageiro *passageiro, Voo *voo, Assento assento);
 
-/* Avalia se duas Reservas são iguais. A função deve retornar 1 se as Reservas
- * possuem os mesmos dados, 0 caso os dados dos Reservas possuam alguma diferença
- * e -1 caso pelo menos um dos Reservas seja NULL Ok.
- */
+// Avalia se duas Reservas são iguais. A função deve retornar 1 se as Reservas possuem os mesmos dados, 0 caso os dados dos Reservas possuam alguma diferença e -1 caso pelo menos um dos Reservas seja NULL Ok.
 int reserva_igual(Reserva *Reserva1, Reserva *Reserva2);
 
 /* Retorna o tamanho em bytes do TAD reserva.  */
@@ -216,23 +192,23 @@ int reserva_tamanho();
 
 
 
+
 //******************************* ArvoreAgenda.h *********************
 /* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
+
+
 
 
 // ************** ArvoreReserva.h *******************
 /* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
 
-/* Aloca e retorna um No com os dados passados por parâmetro. Retorna no nó
- * criado ou NULL caso não seja posivel criar o nó. */
+// Aloca e retorna um No com os dados passados por parâmetro. Retorna o nó criado ou NULL caso não seja posivel criar o nó.
 Agenda* criar_no_agenda(Data* chave, Reserva* conteudo);
 
-// Função para atribuir NULO ao nó reserva. retorna 1 se conseguir liberar, e 0 caso contrário
+// Função para atribuir NULL ao nó reserva. Retorna 1 se conseguir liberar e 0 caso contrário.
 int libera_no_agenda(Agenda* no);
 
-/* Adiciona um nó à esquerda ou à direita do nó raiz. Retorna a raiz da árvore
- * resultante ou NULL caso (i) a raiz e o nó sejam NULL e (ii) caso o nó possua
- * mesma chave que outro nó previamente inserido na árvore. */
+// Adiciona um nó à esquerda ou à direita do nó raiz. Retorna a raiz da árvore resultante ou NULL caso a raiz ou o nó sejam NULL ou o nó possua a mesma chave que outro nó previamente inserido na árvore.
 Agenda* insere_no_agenda (Agenda* raiz, Agenda* no);
 
 /* Retorna o conteúdo do no ou NULL caso o nó seja NULL. */
