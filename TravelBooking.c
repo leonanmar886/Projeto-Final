@@ -885,8 +885,7 @@ int abb_numero(Agenda *raiz) {
   return aux;
 }
 
-Agenda *abb_busca_agenda_passageiro_voo(Agenda *raiz, int id_passageiro,
-                                        int codigo_voo) {
+Agenda *abb_busca_agenda_passageiro_voo(Agenda *raiz, int id_passageiro, int codigo_voo) {
   int aux1, aux2;
   if (raiz != NULL) {
     aux1 = raiz->reserva->passageiro->id;
@@ -896,11 +895,8 @@ Agenda *abb_busca_agenda_passageiro_voo(Agenda *raiz, int id_passageiro,
     return raiz;
   }
   if (raiz != NULL) {
-    return abb_busca_agenda_passageiro_voo(raiz->esq, id_passageiro,
-                                           codigo_voo);
-
-    return abb_busca_agenda_passageiro_voo(raiz->dir, id_passageiro,
-                                           codigo_voo);
+    return abb_busca_agenda_passageiro_voo(raiz->esq, id_passageiro, codigo_voo);
+    return abb_busca_agenda_passageiro_voo(raiz->dir, id_passageiro, codigo_voo);
   }
 }
 

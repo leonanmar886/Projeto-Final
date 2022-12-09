@@ -44,10 +44,10 @@ int data_inteiro(Data* data);
 
 
 
-// Verifica se algum dos valores na struct passageiro é nulo. Se sim, retorna -1. Se não, retorna 1
+// Verifica se algum dos valores na struct passageiro é nulo. Se sim, retorna -1. Se não, retorna 1.
 int passageiro_verifica(Passageiro *passageiro);
 
-// Aloca e retorna um passageiro com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL
+// Aloca e retorna um passageiro com os dados passados por parâmetro. Se algum dos parâmetros for nulo ou o tamanho das strings ultrapassar o tamanho limite, retorna NULL.
 Passageiro *passageiro_novo(int codigo, char *nome, char *endereco);
 
 // Libera a memória de um passageiro previamente criado e atribui NULL ao passageiro. Ok*/
@@ -56,10 +56,10 @@ void passageiro_libera(Passageiro **passageiro);
 // Copia os valores de um passageiro para as referências informadas. Em caso de passageiro NULL, atribui valor padrão <-1, "NULL", "NULL"> aos parâmetros. Ok
 void passageiro_acessa(Passageiro *passageiro, int *codigo, char *origem, char *destino);
 
-// Atribui novos valores aos campos de um passageiro. Porém, para os casos em que algum dos parâmetros seja NULL ou as strings ultrapassem o tamanho limite, a função não deve fazer a atribuição. Ok
+// Atribui novos valores aos campos de um passageiro. Porém, para os casos em que algum dos parâmetros seja NULL ou as strings ultrapassem o tamanho limite, a função não faz a atribuição. Ok
 void passageiro_atribui(Passageiro *passageiro, int codigo, char *origem, char *destino);
 
-// Avalia se dois passageiros são iguas. A função retorna 1 se os passageiros possuem os mesmos dados, retorna 0 se os dados dos passageiros possuem alguma diferença e retorna -1 se pelo menos um dos passageiros seja NULL Ok
+// Avalia se dois passageiros são iguas. A função retorna 1 se os passageiros possuem os mesmos dados, retorna 0 se os dados dos passageiros possuem alguma diferença e retorna -1 se pelo menos um dos passageiros seja NULL. Ok
 int passageiro_igual(Passageiro *passageiro1, Passageiro *passageiro2);
 
 // Retorna o tamanho em bytes do TAD aluno. Ok
@@ -73,16 +73,16 @@ int passageiro_tamanho();
 
 
 
-// Cria um nó do tipo No_Passageiro
+// Cria um nó do tipo No_Passageiro.
 struct no_passageiro* no_passageiro_cria(Passageiro* passageiro);
 
-// Aloca espaço em memória e retorna uma ListaPassageiro ok
+// Aloca espaço em memória e retorna uma ListaPassageiro. ok
 ListaPassageiro *lista_passageiro_cria();
 
 // Libera a memória de uma ListaPassageiro criada anteriormente e atribui NULL ao ponteiro ListaPassageiro. Retorna 1 caso seja possível fazer a liberação e retorna 0 caso a ListaPassageiro informada seja NULL. ok
 int lista_passageiro_libera(ListaPassageiro **ListaPassageiro);
 
-// Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já exista um Passageiro com o mesmo id (nesse caso, o Passageiro será adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL. ok
+// Insere um Passageiro na ListaPassageiro. Retorna 1 se foi possível adicionar, 0 caso já exista um Passageiro com o mesmo id (nesse caso, o Passageiro não será adicionado) e -1 caso a ListaPassageiro ou Passageiro sejam NULL. ok
 int lista_passageiro_insere(ListaPassageiro *ListaPassageiro, Passageiro *Passageiro);
 
 // Remove um Passageiro na ListaPassageiro. Retorna o Passageiro retirado ou NULL se a ListaPassageiro estiver vazia, ou seja, NULL. ok
@@ -211,19 +211,16 @@ int libera_no_agenda(Agenda* no);
 // Adiciona um nó à esquerda ou à direita do nó raiz. Retorna a raiz da árvore resultante ou NULL caso a raiz ou o nó sejam NULL ou o nó possua a mesma chave que outro nó previamente inserido na árvore.
 Agenda* insere_no_agenda (Agenda* raiz, Agenda* no);
 
-/* Retorna o conteúdo do no ou NULL caso o nó seja NULL. */
+// Retorna o conteúdo do nó ou NULL caso o nó seja NULL.
 Reserva* conteudo_agenda(Agenda* no);
 
-/* Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em
- * caso contrário. */
+// Procura a reserva na agenda através do código. Retorna o nó caso a busca obtenha sucesso ou NULL caso contrário.
 Agenda *busca_agenda_codigo(Agenda *agenda_raiz, int codigo);
 
-/* Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em
- * caso contrário. */
+// Procura a reserva do passageiro pelo id deste e pelo código do voo passados por parâmetro. Retorna o nó caso a busca obtenha sucesso ou NULL caso contrário.
 Agenda *abb_busca_agenda_passageiro_voo(Agenda *agenda_raiz, int id_passageiro, int codigo_voo);
 
-/* Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em
- * caso contrário. */
+// Procura o nó pela chave. Retorna o nó caso a busca obtenha sucesso ou NULL em caso contrário.
 Agenda *abb_busca_agenda_data_passageiro(Agenda *agenda_raiz, int id_passageiro, Data* data_viagem);
 
 /* Remove o nó com a chave fornecida. Retorna a raiz da arvore atualizada ou
