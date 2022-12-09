@@ -1618,15 +1618,17 @@ int main(void) {
             Data *data1 = data_nova(16, 4, 2023);
             Data *data2 = data_nova(25, 5, 2023);
             Data *data3 = data_nova(8, 7, 2023);
-            Assento assento1 = A0;
+            Assento assento1 = C1;
+            Assento assento2 = C3;
+           Assento assento3 = A9;
             Passageiro *passageiro1 = passageiro_novo(9008, "Roberta Montenegro", "Av. Humberto Monte, 2202");
             Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
             Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");
             Voo *voo3 = voo_novo(12, "Buenos Aires", "São Paulo");
-
+   
             Reserva *reserva1 = reserva_nova(534, data1, passageiro1, voo1, assento1);
-            Reserva *reserva2 = reserva_nova(893, data2, passageiro1, voo2, assento1);
-            Reserva *reserva3 = reserva_nova(512, data3, passageiro1, voo3, assento1);
+            Reserva *reserva2 = reserva_nova(893, data2, passageiro1, voo2, assento2);
+            Reserva *reserva3 = reserva_nova(512, data3, passageiro1, voo3, assento3);
              
             
            lista_viagem_insere(viagem, reserva1);

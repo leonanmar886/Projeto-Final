@@ -94,6 +94,42 @@ void printa_data(Data* data){
   
   printf("Data da viagem: %d/%d/%d\n",dia,mes,ano);
 }
+void printa_assento(int assento){
+  if (assento == 1){
+     printf ("Assento = A%d\n", assento);
+  }
+  else if(assento%3 == 0) {
+    int aux = 3,total=0;
+    
+    while(aux!= assento){
+     aux+=3 ;
+      total++;
+    }
+    printf ("Assento = C%d\n", total);
+  }
+  else if((assento-1)%3 ==0){
+    int aux = 1,total=0;
+    
+    while(aux!= assento){
+     aux+=3 ;
+      total++;
+      }
+     printf ("Assento = A%d\n", total);
+  } 
+  else{
+    int aux = 2,total=0;
+    
+    while(aux!= assento){
+     aux+=3 ;
+      total++;
+      }
+     printf ("Assento = B%d\n", total);
+    
+  }
+  
+  
+  
+}
 // Retorna apenas um inteiro para ser a chave da data;
 int data_inteiro(Data* data){
 
@@ -1031,6 +1067,7 @@ void imprimir_viagem(TabelaViagem* tabela, int indice){
    printf("Nome do passageiro: %s\n", aux->reserva->passageiro->nome);
    printf("Id do passageiro: %d\n", aux->reserva->passageiro->id); 
    printf("Endereço do passageiro: %s\n", aux->reserva->passageiro->endereco);
+   printa_assento(aux->reserva->assento);
    ordem++;  
    aux = aux->proximo;
   }

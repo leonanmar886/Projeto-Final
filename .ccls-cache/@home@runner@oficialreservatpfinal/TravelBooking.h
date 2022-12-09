@@ -1,5 +1,5 @@
 enum cod_assento {
-    A0, B0, C0,
+    A0 = 1, B0, C0,
     A1, B1, C1, 
     A2, B2, C2,
     A3, B3, C3,
