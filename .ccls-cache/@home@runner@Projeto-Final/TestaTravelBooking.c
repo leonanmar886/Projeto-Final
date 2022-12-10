@@ -1618,9 +1618,9 @@ int main(void) {
             Data *data1 = data_nova(16, 4, 2023);
             Data *data2 = data_nova(25, 5, 2023);
             Data *data3 = data_nova(8, 7, 2023);
-            Assento assento1 = C1;
-            Assento assento2 = C3;
-           Assento assento3 = A9;
+            Assento assento1 = A0;
+            Assento assento2 = A2;
+           Assento assento3 = A1;
             Passageiro *passageiro1 = passageiro_novo(9008, "Roberta Montenegro", "Av. Humberto Monte, 2202");
             Voo *voo1 = voo_novo(52, "Nova Iorque", "Londres");
             Voo *voo2 = voo_novo(12, "Londres", "Buenos Aires");

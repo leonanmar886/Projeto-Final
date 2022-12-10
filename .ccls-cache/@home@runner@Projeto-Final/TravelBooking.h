@@ -193,12 +193,9 @@ int reserva_tamanho();
 
 
 
-//******************************* ArvoreAgenda.h *********************
-/* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
+// *********************** Agenda.h ***********************
 
 
-// ****************************** ArvoreReserva.h ********************
-/* TAD: Agenda (Reserva *reserva, Agenda *esq, Agenda *dir) */
 
 
 // Aloca e retorna um No com os dados passados por parâmetro. Retorna o nó criado ou NULL caso não seja posivel criar o nó.
@@ -225,7 +222,6 @@ Agenda *abb_busca_agenda_data_passageiro(Agenda *agenda_raiz, int id_passageiro,
 // Remove o nó com a chave fornecida. Retorna a raiz da árvore atualizada ou NULL se a raiz fornecida for NULL. 
 Agenda* remove_no_agenda(Agenda* raiz, int codigo);
 
-
 // Retorna a altura da árvore ou -1 caso a raiz seja NULL.
 int abb_altura(Agenda *agenda);
 
@@ -245,78 +241,102 @@ Agenda *Sucessor(Agenda *agenda);
 Agenda *Minimo (Agenda *agenda);
 
 
+
+
+//*********************** listaViagem.h ***********************
+
+
+
+
 // Aloca espaço na memória e retorna uma ListaPassageiro.
 Viagem* lista_viagem_cria();
 
-// Busca um Voo pelo número do código. Retorna o Voo se este estiver na lista e retorna NULL se a ListaVoo for vazia, se não existir o Voo com o código fornecido ou caso a ListaVoo for NULL. ok
+//Busca uma Reserva pelo número do código da reserva. Retorna a reserva caso ela esteja na lista ou retorna NULL se a viagem não estiver na lista ou se ela ou o primeiro trecho da viagem forem NULL.
 Reserva* lista_viagem_busca(Viagem* viagem, int codigo);
 
-// Insere uma reserva na ListaViagem. Retorna -1 se a viagem ou a reserva for NULL
+// Insere uma reserva na ListaViagem. Retorna -1 se a viagem ou a reserva for NULL, 0 se já existir uma reserva com o código fornecido e retorna 1 se for possível inserir.
 int lista_viagem_insere(Viagem* viagem, Reserva* reserva);
 
-//
+// Verifica se uma Viagem é vazia. Retorna 1 se ela for, retorna -1 se não for e retorna 0 se seu primeiro trecho for nulo. 
 int lista_viagem_vazia(Viagem* viagem);
 
-//
+//Retorna o primeiro trecho da viagem ou NULL caso a viagem ou o primeiro trecho sejam NULL.
 Trecho* lista_viagem_primeiro(Viagem* viagem);
 
-//
+//Remove a viagem da lista e retorna ela. Se a viagem ou o primeiro trecho dela forem NULL, retorna NULL.
 Trecho* lista_viagem_retira(Viagem* viagem);
 
-//
+// Libera a memória de uma Viagem previamente criada e atribui NULL ao ponteiro Viagem. Retorna 1 caso seja possível fazer a liberação e retorna 0 caso a Viagem informada seja NULL. ok
 int lista_viagem_libera(Viagem** viagem);
 
-/* Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho.
-  (i) Se os campos passados como parametro forem NULL, a função retorna NULL;
-*/
-Trecho* novo_trecho(Reserva* reserva, Trecho* proximo_trecho);
+// Compara duas viagens e retorna 1 se forem diferentes, -1 se alguma delas for NULL e 0 
+int viagem_igual(Viagem* viagem1, Viagem* viagem2);
 
-// Libera o espaço de memória atribuído a um trecho e atribui NULL ao Trecho.
+
+
+// *********************** Trecho.h ***********************
+
+
+
+
+// Libera o espaço de memória atribuído a um trecho previamente criado e atribui NULL ao Trecho.
 int trecho_libera(Trecho** trecho);
 
-//Atribui aos campos os valores de reserva e proximo trecho armazenados no trecho.
+// Atribui aos campos os valores de reserva e proximo trecho armazenados no trecho.
 int trecho_acessa(Trecho* trecho, Reserva* reserva, Trecho* proximo_trecho);
 
-/* Atribui ao trecho passado como parâmetro os novos valores de reserva e proximo trecho.
-   (i) Se os campos passados como parâmetro forem inválidos, as alterações não serão feitas.
-   (ii) Se o trecho passado como parâmetro for NULL, as alterações não serão feitas.
-*/
+// Atribui ao trecho passado como parâmetro os novos valores de reserva e próximo trecho. Se os campos passados como parâmetro forem inválidos, as alterações não serão feitas. Se o trecho passado como parâmetro for NULL, as alterações não serão feitas.
 int trecho_atribui(Trecho* trecho, Reserva* nova_reserva, Trecho* novo_proximo_trecho);
 
-/* Verifica se os trechos passados como parâmetros são iguais. Os trechos serão considerados iguais
-   se e somente se as reservas e os proximos trechos forem iguais.
-   (i) Se os trechos forem iguais, a função retorna 1.
-   (ii) Se os trechos forem diferentes, a função retorna 0.
-   (iii) Se um dos trechos for inválido ou NULL, a função retorna -1.
-*/
+// Verifica se os trechos passados como parâmetros são iguais. Os trechos serão considerados iguais se e somente se as reservas e os proximos trechos forem iguais. Se os trechos forem iguais, a função retorna 1. Se os trechos forem diferentes, a função retorna 0. Se um dos trechos for inválido ou NULL, a função retorna -1.
 int trecho_igual(Trecho* trecho1, Trecho* trecho2);
 
+// Aloca e retorna um novo trecho que contém uma reserva e um ponteiro para o próximo trecho. Se os campos passados como parâmetro forem NULL, a função retorna NULL.
 Trecho* trecho_cria(Reserva* reserva);
 
+// Verifica se um trecho é válido e retorna 1, se for inválido retorna 0.
 int trecho_valido(Trecho* trecho_origem, Trecho* trecho_destino);
 
+
+
+
+// *********************** Hash.h ***********************
+
+
+
+
+// Verifica se o valor passado como parâmetro é primo. Retorna 1 se for primo e retorna 0 se não for.
 int eh_primo(int valor);
 
+// Aloca espaço e cria uma tabela com o tamanho passado por parâmetro.
 TabelaViagem* cria_hash(int tamanho);
 
+// Atribui NULL aos espaços da tabela.
 void inicializar_hash(TabelaViagem* tabela);
 
+// Soma o id do passageiro e os códigos das reservas associadas a ele.
 int codigo_hash(Viagem* viagem);
 
+// Índice do vetor, é gerado pelo resto da divisão do código hash pelo tamanho do vetor.
 int funcaoHash(TabelaViagem* tabela, int codigoHash);
 
+// Insere a viagem na tabela se o espaço for NULL. Retorna 1 se for possível inserir, se não, retorna 0.
 int inserir_hash(TabelaViagem* tabela, Viagem* viagem);
 
+// Busca uma viagem pelo índice na tabela.
 Viagem* busca_hash(TabelaViagem* tabela, int indice);
 
+// Retira um roteiro de viagem da Tabela e atribui NULL, retorna NULL se o roteiro for NULL, se não retorna o roteiro removido.
 Viagem* retira_hash(TabelaViagem* tabela, int indice);
 
+// Libera o espaço da tabela previamente criada e atribui NULL.
 int libera_hash(TabelaViagem** tabela);
 
+// Imprime o itinerário da viagem.
 void imprimir_viagem(TabelaViagem* tabela, int indice);
 
+// Retorna o tamanho da tabela hash.
 int tamanho_hash(TabelaViagem* tabela);
 
+// Retorna a viagem da respectiva tabela.
 Viagem* ponteiro_hash(TabelaViagem* tabela);
-
-int viagem_igual(Viagem* viagem1, Viagem* viagem2);

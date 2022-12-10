@@ -916,7 +916,6 @@ Agenda *abb_busca_agenda_data_passageiro(Agenda *raiz, int id_, Data *data) {
   return abb_busca_agenda_data_passageiro(raiz->dir, id_, data);
 }
 
-// *************************** Tabela Hash ******************************
 
 int eh_primo(int valor) {
   int i = 2;
@@ -950,6 +949,7 @@ void inicializar_hash(TabelaViagem *tabela) {
   }
 }
 
+
 int codigo_hash(Viagem *viagem) {
   int soma = 0;
   Trecho *aux = viagem->primeiro_trecho;
@@ -964,9 +964,11 @@ int codigo_hash(Viagem *viagem) {
   return soma;
 }
 
+
 int funcaoHash(TabelaViagem *tabela, int codigoHash) {
   return codigoHash % tabela->tamanho;
 }
+
 
 int inserir_hash(TabelaViagem *tabela, Viagem *viagem) {
   int id = funcaoHash(tabela, codigo_hash(viagem));
@@ -1005,7 +1007,7 @@ Viagem *retira_hash(TabelaViagem *tabela, int indice) {
   return aux;
 }
 
-//
+
 int libera_hash(TabelaViagem **tabela) {
   if (tabela == NULL)
     return 0;
@@ -1102,8 +1104,7 @@ Reserva *lista_viagem_busca(Viagem *viagem, int codigo) {
     Voo *voo;
     Assento assento;
     do {
-      reserva_acessa(x->reserva, &codigo_aux, &data, &passageiro, &voo,
-                     &assento);
+      reserva_acessa(x->reserva, &codigo_aux, &data, &passageiro, &voo, &assento);
       if (codigo == codigo_aux) {
         return x->reserva;
       }
