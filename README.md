@@ -84,7 +84,7 @@ int lista_passageiro_insere(ListaPassageiro* lista, Passageiro* passa){
   }
   
 }
-
+/////////////////////////////////////////////////////////////
 int lista_voo_insere(ListaVoo *lista, Voo *voo){
   if(lista == NULL || voo == NULL){
     return -1;
@@ -114,31 +114,3 @@ int lista_voo_insere(ListaVoo *lista, Voo *voo){
   }
 }
 
-int lista_voo_insere(ListaVoo *lista, Voo *voo){
-  if(lista == NULL || voo == NULL){
-    return -1;
-  }
-
-  if(lista->primeiro != NULL){
-    int codigo;
-    char origem[100];
-    char destino[100];
-    voo_acessa(voo, &codigo, origem, destino);
-    Voo *aux = lista_voo_busca(lista, codigo);
-    if(aux != NULL){
-      return 0;
-    }
-    No_Voo* ultimo = lista->primeiro;
-    while (ultimo->proximo != NULL){
-      ultimo = ultimo->proximo;
-    }
-    No_Voo* novo = no_voo_cria(voo);
-    ultimo->proximo = novo;
-    return 1;    
-  }
-  else if (lista->primeiro == NULL){
-    No_Voo* novo = no_voo_cria(voo);
-    lista->primeiro = novo;
-    return 1;
-  }
-}

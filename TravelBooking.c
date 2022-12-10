@@ -951,6 +951,7 @@ void inicializar_hash(TabelaViagem *tabela) {
 
 
 int codigo_hash(Viagem *viagem) {
+   if(viagem == NULL) return -1;
   int soma = 0;
   Trecho *aux = viagem->primeiro_trecho;
 
@@ -966,11 +967,14 @@ int codigo_hash(Viagem *viagem) {
 
 
 int funcaoHash(TabelaViagem *tabela, int codigoHash) {
+  if(tabela == NULL || codigoHash<0) return -1;
   return codigoHash % tabela->tamanho;
 }
 
 
 int inserir_hash(TabelaViagem *tabela, Viagem *viagem) {
+  if(tabela == NULL || viagem == NULL) return -1;
+  
   int id = funcaoHash(tabela, codigo_hash(viagem));
 
   if ((&(tabela->tabela_hash))[id] ==
@@ -982,7 +986,8 @@ int inserir_hash(TabelaViagem *tabela, Viagem *viagem) {
 }
 
 Viagem *busca_hash(TabelaViagem *tabela, int indice) {
-
+if(tabela == NULL || indice<0) return NULL;
+  
   if ((&(tabela->tabela_hash))[indice] != NULL) {
 
     return (&(tabela->tabela_hash))[indice];
@@ -995,7 +1000,8 @@ Viagem *busca_hash(TabelaViagem *tabela, int indice) {
 //, e o roteiro caso contrário
 
 Viagem *retira_hash(TabelaViagem *tabela, int indice) {
-
+if(tabela == NULL || indice<0) return NULL;
+  
   Viagem *aux;
   if ((&(tabela->tabela_hash))[indice] == NULL) {
     return NULL;
